@@ -73,7 +73,7 @@ const About = () => {
           <div className="relative">
             <img
               className="w-full rounded-2xl shadow-2xl"
-              src={assets.about_img}
+              src={assets.about_image}
               alt="GearMates Tech Accessories Store"
             />
             <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-2xl shadow-lg">
