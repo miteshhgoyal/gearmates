@@ -18,7 +18,20 @@ import menu_icon from './menu_icon.png'
 import contact_img from './contact_img.png'
 import cross_icon from './cross_icon.png'
 
+import accessories from './accessories.png';
+import security from './security.png';
+import powerbank from './powerbank.png';
+import charger from './charger.png';
+import cables from './cables.png';
+import audio from './audio.png';
+
 export const assets = {
+    audio,
+    cables,
+    charger,
+    powerbank,
+    security,
+    accessories,
     logo,
     cart_icon,
     dropdown_icon,
