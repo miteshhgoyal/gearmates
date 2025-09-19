@@ -13,6 +13,7 @@ import {
   Battery,
   Shield,
 } from "lucide-react";
+import { assets } from "../assets/assets";
 
 const Footer = () => {
   const quickLinks = [
@@ -63,9 +64,6 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
-                GearMates
-              </h3>
               <p className="text-gray-400 mt-2 text-sm leading-relaxed">
                 Your trusted partner for premium tech accessories. We curate the
                 finest mobile accessories, audio gear, and innovative tech tools

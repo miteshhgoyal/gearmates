@@ -78,9 +78,7 @@ const Navbar = () => {
 
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2 group">
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                GearMates
-              </span>
+              <img src={assets.logo} className="w-60" />
             </Link>
           </div>
 
