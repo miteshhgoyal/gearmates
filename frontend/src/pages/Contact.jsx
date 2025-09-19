@@ -13,11 +13,14 @@ import {
 } from "lucide-react";
 
 const Contact = () => {
+  const GOOGLE_MAPS_EMBED_URL =
+    "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3500.1827636747953!2d77.34253199999999!3d28.684179!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDQxJzAzLjAiTiA3N8KwMjAnMzMuMSJF!5e0!3m2!1sen!2sin!4v1758295705826!5m2!1sen!2sin";
+
   const contactMethods = [
     {
       icon: Phone,
       title: "Phone Support",
-      info: "+91 92051 63669",
+      info: "+91 92051 63669, +91 70538 09341",
       description: "Call us for immediate assistance",
       availability: "Mon-Sat, 9 AM - 8 PM IST",
     },
@@ -31,7 +34,7 @@ const Contact = () => {
     {
       icon: MessageCircle,
       title: "WhatsApp Chat",
-      info: "+91 92051 63669",
+      info: "+91 92051 63669, +91 70538 09341",
       description: "Quick chat support available",
       availability: "Mon-Sat, 9 AM - 8 PM IST",
     },
@@ -90,7 +93,9 @@ const Contact = () => {
                 <MapPin className="h-5 w-5" />
                 <div>
                   <p className="font-bold">Visit Our Store</p>
-                  <p className="text-sm text-red-100">Punjab, India</p>
+                  <p className="text-sm text-red-100">
+                    C-91, Shalimar Garden, Sahibabad, Ghaziabad, Uttar Pradesh
+                  </p>
                 </div>
               </div>
             </div>
@@ -151,15 +156,64 @@ const Contact = () => {
                   <p className="text-gray-700 mb-2">
                     GearMates Tech Store
                     <br />
-                    Budhlada, Punjab 151502
+                    C-91, Shalimar Garden, Sahibabad
                     <br />
-                    India
+                    Ghaziabad, Uttar Pradesh
                   </p>
                   <div className="flex items-center space-x-2 text-sm text-gray-600">
                     <Clock className="h-4 w-4" />
                     <span>Currently Open</span>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Google Maps Section */}
+        <div className="mb-20">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Find Us on Map
+            </h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Visit our physical store for hands-on experience with our tech
+              accessories. We're conveniently located in Shalimar Garden,
+              Sahibabad.
+            </p>
+          </div>
+
+          {/* Responsive Google Maps Container */}
+          <div className="relative w-full overflow-hidden rounded-2xl shadow-2xl bg-gray-100">
+            <div
+              className="relative w-full"
+              style={{ paddingBottom: "56.25%" }} // 16:9 aspect ratio
+            >
+              <iframe
+                title="GearMates Store Location"
+                src={GOOGLE_MAPS_EMBED_URL}
+                className="absolute top-0 left-0 w-full h-full border-0"
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
+
+          {/* Quick Directions */}
+          <div className="mt-8 bg-gradient-to-r from-red-50 to-orange-50 rounded-xl p-6">
+            <div className="flex flex-col md:flex-row items-center justify-between">
+              <div className="text-center md:text-left mb-4 md:mb-0">
+                <h4 className="text-lg font-bold text-gray-900 mb-2">
+                  Need Directions?
+                </h4>
+                <p className="text-gray-600">
+                  Click on the map to get turn-by-turn directions to our store
+                </p>
+              </div>
+              <div className="flex items-center space-x-3 text-sm text-gray-600">
+                <MapPin className="h-5 w-5 text-red-600" />
+                <span>C-91, Shalimar Garden, Sahibabad</span>
               </div>
             </div>
           </div>
@@ -232,7 +286,9 @@ const Contact = () => {
                   For immediate assistance outside business hours, send us a
                   WhatsApp message.
                 </p>
-                <p className="text-white font-medium">+91 92051 63669</p>
+                <p className="text-white font-medium">
+                  +91 92051 63669, +91 70538 09341
+                </p>
               </div>
             </div>
           </div>

@@ -75,7 +75,9 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-red-400" />
-                <span className="text-sm text-gray-300">+91 92051 63669</span>
+                <span className="text-sm text-gray-300">
+                  +91 92051 63669, +91 70538 09341
+                </span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-red-400" />
@@ -86,7 +88,7 @@ const Footer = () => {
               <div className="flex items-center space-x-3">
                 <MapPin className="h-4 w-4 text-red-400" />
                 <span className="text-sm text-gray-300">
-                  Budhlada, Punjab, India
+                  C-91, Shalimar Garden, Sahibabad, Ghaziabad, Uttar Pradesh
                 </span>
               </div>
             </div>
