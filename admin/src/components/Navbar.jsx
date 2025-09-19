@@ -9,7 +9,7 @@ const Navbar = ({ setToken, sidebarOpen, setSidebarOpen }) => {
         <div className="flex items-center">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             {sidebarOpen ? (
               <X className="w-6 h-6" />
@@ -20,10 +20,10 @@ const Navbar = ({ setToken, sidebarOpen, setSidebarOpen }) => {
 
           {/* Logo */}
           <div className="flex items-center ml-2 lg:ml-0">
-            <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
               GearMates
             </h1>
-            <span className="ml-2 sm:ml-3 bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
+            <span className="ml-2 sm:ml-3 bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium">
               Admin
             </span>
           </div>

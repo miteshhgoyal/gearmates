@@ -109,7 +109,7 @@ const ReviewsSection = ({ productId }) => {
             <p className="text-gray-600 mb-4">
               Help others make informed decisions
             </p>
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+            <button className="bg-red-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors">
               Write a Review
             </button>
           </div>
@@ -125,7 +125,7 @@ const ReviewsSection = ({ productId }) => {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>

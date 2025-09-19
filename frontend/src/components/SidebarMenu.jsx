@@ -84,7 +84,7 @@ const MenuItem = ({ item, onClick, isTransitioning }) => {
         className={({ isActive }) =>
           `group flex items-center space-x-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors duration-200 ${
             isActive
-              ? "bg-blue-50 text-blue-600 border-r-2 border-blue-600"
+              ? "bg-red-50 text-red-600 border-r-2 border-red-600"
               : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
           }`
         }
@@ -241,7 +241,7 @@ const SidebarMenu = ({ isOpen, onClose, token, onLogout }) => {
                 <Link
                   to="/login"
                   onClick={onClose}
-                  className="flex w-full items-center justify-center rounded-md bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                  className="flex w-full items-center justify-center rounded-md bg-red-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-red-700"
                 >
                   Sign In
                 </Link>

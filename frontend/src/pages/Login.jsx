@@ -113,11 +113,11 @@ const Login = () => {
   }, [token, navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-orange-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-red-600 to-orange-600 rounded-full mb-4">
             <Shield className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -147,7 +147,7 @@ const Login = () => {
                     type="text"
                     value={formData.name}
                     onChange={(e) => handleInputChange("name", e.target.value)}
-                    className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                    className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors ${
                       errors.name ? "border-red-500" : "border-gray-300"
                     }`}
                     placeholder="Enter your full name"
@@ -173,7 +173,7 @@ const Login = () => {
                   type="email"
                   value={formData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
-                  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors ${
                     errors.email ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Enter your email"
@@ -200,7 +200,7 @@ const Login = () => {
                   onChange={(e) =>
                     handleInputChange("password", e.target.value)
                   }
-                  className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                  className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors ${
                     errors.password ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Enter your password"
@@ -232,7 +232,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
+              className="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-red-700 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -257,7 +257,7 @@ const Login = () => {
             <button
               type="button"
               onClick={switchAuthMode}
-              className="ml-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors"
+              className="ml-2 text-red-600 hover:text-red-800 font-semibold transition-colors"
             >
               {currentState === "Login" ? "Sign up" : "Sign in"}
             </button>
@@ -272,8 +272,8 @@ const Login = () => {
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
               <div>
-                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                  <Shield className="w-5 h-5 text-blue-600" />
+                <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                  <Shield className="w-5 h-5 text-red-600" />
                 </div>
                 <p className="text-sm font-medium text-gray-900">
                   Secure Shopping
@@ -290,8 +290,8 @@ const Login = () => {
                 <p className="text-xs text-gray-600">Quick shipping</p>
               </div>
               <div>
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                  <User className="w-5 h-5 text-purple-600" />
+                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                  <User className="w-5 h-5 text-orange-600" />
                 </div>
                 <p className="text-sm font-medium text-gray-900">
                   Premium Support

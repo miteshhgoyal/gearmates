@@ -15,8 +15,8 @@ const OurPolicy = () => {
       title: "Quality Guaranteed",
       description:
         "Premium quality tech accessories with manufacturer warranty",
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
+      color: "text-red-600",
+      bgColor: "bg-red-50",
     },
     {
       icon: RotateCcw,
@@ -29,8 +29,8 @@ const OurPolicy = () => {
       icon: Truck,
       title: "Fast Shipping",
       description: "Quick delivery across India with real-time tracking",
-      color: "text-purple-600",
-      bgColor: "bg-purple-50",
+      color: "text-orange-600",
+      bgColor: "bg-orange-50",
     },
     {
       icon: Headphones,
@@ -50,8 +50,8 @@ const OurPolicy = () => {
       icon: Clock,
       title: "Quick Response",
       description: "Fast customer service response within 2 hours",
-      color: "text-indigo-600",
-      bgColor: "bg-indigo-50",
+      color: "text-orange-600",
+      bgColor: "bg-orange-50",
     },
   ];
 

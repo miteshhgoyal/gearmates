@@ -306,7 +306,7 @@ const Collection = () => {
             <div className="text-sm text-gray-600 font-medium">
               {filterProducts.length} items
               {activeFiltersCount > 0 && (
-                <span className="block text-xs text-blue-600">
+                <span className="block text-xs text-red-600">
                   {activeFiltersCount} filter{activeFiltersCount > 1 ? "s" : ""}{" "}
                   active
                 </span>
@@ -320,7 +320,7 @@ const Collection = () => {
                 <select
                   value={sortType}
                   onChange={(e) => setSortType(e.target.value)}
-                  className="appearance-none border border-gray-300 rounded-lg px-3 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                  className="appearance-none border border-gray-300 rounded-lg px-3 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 bg-white"
                 >
                   <option value="relevant">Relevant</option>
                   <option value="newest">Newest</option>
@@ -335,12 +335,12 @@ const Collection = () => {
               {/* Filter Button */}
               <button
                 onClick={() => setShowFilter(true)}
-                className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-medium shadow-sm active:scale-95 transition-transform"
+                className="flex items-center space-x-2 bg-red-600 text-white px-4 py-2 rounded-lg font-medium shadow-sm active:scale-95 transition-transform"
               >
                 <Filter className="w-4 h-4" />
                 <span>Filter</span>
                 {activeFiltersCount > 0 && (
-                  <span className="bg-white text-blue-600 text-xs px-2 py-1 rounded-full font-bold min-w-[20px] text-center">
+                  <span className="bg-white text-red-600 text-xs px-2 py-1 rounded-full font-bold min-w-[20px] text-center">
                     {activeFiltersCount}
                   </span>
                 )}
@@ -359,7 +359,7 @@ const Collection = () => {
                 {category.map((cat) => (
                   <span
                     key={cat}
-                    className="inline-flex items-center bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs whitespace-nowrap shrink-0"
+                    className="inline-flex items-center bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs whitespace-nowrap shrink-0"
                   >
                     {cat.length > 15 ? cat.substring(0, 15) + "..." : cat}
                     <button
@@ -389,7 +389,7 @@ const Collection = () => {
                 {brands.map((brand) => (
                   <span
                     key={brand}
-                    className="inline-flex items-center bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs whitespace-nowrap shrink-0"
+                    className="inline-flex items-center bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-xs whitespace-nowrap shrink-0"
                   >
                     {brand}
                     <button onClick={() => toggleBrand(brand)} className="ml-2">
@@ -432,7 +432,7 @@ const Collection = () => {
               <p className="text-gray-600">
                 {filterProducts.length} products found
                 {activeFiltersCount > 0 && (
-                  <span className="ml-2 text-blue-600 font-medium">
+                  <span className="ml-2 text-red-600 font-medium">
                     ({activeFiltersCount} filter
                     {activeFiltersCount > 1 ? "s" : ""} applied)
                   </span>
@@ -447,7 +447,7 @@ const Collection = () => {
                   onClick={() => setViewMode("grid")}
                   className={`p-2 rounded-md transition-colors ${
                     viewMode === "grid"
-                      ? "bg-white text-blue-600 shadow-sm"
+                      ? "bg-white text-red-600 shadow-sm"
                       : "text-gray-600 hover:text-gray-800"
                   }`}
                   title="Grid view"
@@ -458,7 +458,7 @@ const Collection = () => {
                   onClick={() => setViewMode("list")}
                   className={`p-2 rounded-md transition-colors ${
                     viewMode === "list"
-                      ? "bg-white text-blue-600 shadow-sm"
+                      ? "bg-white text-red-600 shadow-sm"
                       : "text-gray-600 hover:text-gray-800"
                   }`}
                   title="List view"
@@ -472,7 +472,7 @@ const Collection = () => {
                 <select
                   value={sortType}
                   onChange={(e) => setSortType(e.target.value)}
-                  className="appearance-none border border-gray-300 rounded-lg px-4 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white hover:border-gray-400 transition-colors"
+                  className="appearance-none border border-gray-300 rounded-lg px-4 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 bg-white hover:border-gray-400 transition-colors"
                 >
                   <option value="relevant">Most Relevant</option>
                   <option value="newest">Newest First</option>
@@ -496,12 +496,12 @@ const Collection = () => {
               {category.map((cat) => (
                 <span
                   key={cat}
-                  className="inline-flex items-center bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                  className="inline-flex items-center bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm"
                 >
                   {cat}
                   <button
                     onClick={() => toggleCategory(cat)}
-                    className="ml-2 hover:bg-blue-200 rounded-full p-0.5"
+                    className="ml-2 hover:bg-red-200 rounded-full p-0.5"
                   >
                     <X className="w-3 h-3" />
                   </button>
@@ -526,12 +526,12 @@ const Collection = () => {
               {brands.map((brand) => (
                 <span
                   key={brand}
-                  className="inline-flex items-center bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm"
+                  className="inline-flex items-center bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm"
                 >
                   {brand}
                   <button
                     onClick={() => toggleBrand(brand)}
-                    className="ml-2 hover:bg-purple-200 rounded-full p-0.5"
+                    className="ml-2 hover:bg-orange-200 rounded-full p-0.5"
                   >
                     <X className="w-3 h-3" />
                   </button>
@@ -596,7 +596,7 @@ const Collection = () => {
                     type="checkbox"
                     checked={showBestsellers}
                     onChange={(e) => setShowBestsellers(e.target.checked)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                    className="w-5 h-5 text-red-600 rounded focus:ring-red-500"
                   />
                   <span className="flex items-center text-base font-medium text-gray-900">
                     <Star className="w-5 h-5 mr-2 text-yellow-400 fill-current" />
@@ -621,7 +621,7 @@ const Collection = () => {
                         value={option.value}
                         checked={category.includes(option.value)}
                         onChange={() => toggleCategory(option.value)}
-                        className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                        className="w-5 h-5 text-red-600 rounded focus:ring-red-500"
                       />
                       <span className="flex items-center text-base text-gray-700">
                         <span className="text-lg mr-3">{option.icon}</span>
@@ -654,7 +654,7 @@ const Collection = () => {
                             value={option}
                             checked={subCategory.includes(option)}
                             onChange={() => toggleSubCategory(option)}
-                            className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                            className="w-5 h-5 text-red-600 rounded focus:ring-red-500"
                           />
                           <span className="text-base text-gray-700">
                             {option}
@@ -687,7 +687,7 @@ const Collection = () => {
                             priceRange[1],
                           ])
                         }
-                        className="w-full px-3 py-3 border border-gray-300 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-3 border border-gray-300 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-red-500"
                       />
                     </div>
                     <div>
@@ -704,7 +704,7 @@ const Collection = () => {
                             parseInt(e.target.value) || 10000,
                           ])
                         }
-                        className="w-full px-3 py-3 border border-gray-300 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-3 border border-gray-300 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-red-500"
                       />
                     </div>
                   </div>
@@ -724,8 +724,8 @@ const Collection = () => {
                         onClick={() => setPriceRange([min, max])}
                         className={`px-3 py-2 text-sm rounded-lg border transition-colors ${
                           priceRange[0] === min && priceRange[1] === max
-                            ? "bg-blue-600 text-white border-blue-600"
-                            : "bg-white text-gray-700 border-gray-300 hover:border-blue-300"
+                            ? "bg-red-600 text-white border-red-600"
+                            : "bg-white text-gray-700 border-gray-300 hover:border-red-300"
                         }`}
                       >
                         ₹{min === 0 && max === 10000 ? "All" : `${min}-${max}`}
@@ -752,7 +752,7 @@ const Collection = () => {
                           value={brand}
                           checked={brands.includes(brand)}
                           onChange={() => toggleBrand(brand)}
-                          className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                          className="w-5 h-5 text-red-600 rounded focus:ring-red-500"
                         />
                         <span className="text-base text-gray-700">{brand}</span>
                       </label>
@@ -773,7 +773,7 @@ const Collection = () => {
                 </button>
                 <button
                   onClick={() => setShowFilter(false)}
-                  className="flex-1 bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm"
+                  className="flex-1 bg-red-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-red-700 transition-colors shadow-sm"
                 >
                   Show {filterProducts.length} Results
                 </button>
@@ -791,7 +791,7 @@ const Collection = () => {
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 sticky top-32">
               <div className="p-6 border-b border-gray-200">
                 <h3 className="text-lg font-semibold text-gray-900 flex items-center">
-                  <SlidersHorizontal className="w-5 h-5 mr-2 text-blue-600" />
+                  <SlidersHorizontal className="w-5 h-5 mr-2 text-red-600" />
                   Filters
                 </h3>
               </div>
@@ -804,7 +804,7 @@ const Collection = () => {
                       type="checkbox"
                       checked={showBestsellers}
                       onChange={(e) => setShowBestsellers(e.target.checked)}
-                      className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                      className="w-4 h-4 text-red-600 rounded focus:ring-red-500"
                     />
                     <span className="flex items-center text-sm font-medium text-gray-900 group-hover:text-gray-700">
                       <Star className="w-4 h-4 mr-2 text-yellow-400 fill-current" />
@@ -829,7 +829,7 @@ const Collection = () => {
                           value={option.value}
                           checked={category.includes(option.value)}
                           onChange={() => toggleCategory(option.value)}
-                          className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                          className="w-4 h-4 text-red-600 rounded focus:ring-red-500"
                         />
                         <span className="flex items-center text-sm text-gray-700 group-hover:text-gray-900">
                           <span className="mr-2">{option.icon}</span>
@@ -862,7 +862,7 @@ const Collection = () => {
                               value={option}
                               checked={subCategory.includes(option)}
                               onChange={() => toggleSubCategory(option)}
-                              className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                              className="w-4 h-4 text-red-600 rounded focus:ring-red-500"
                             />
                             <span className="text-sm text-gray-700">
                               {option}
@@ -890,7 +890,7 @@ const Collection = () => {
                             value={brand}
                             checked={brands.includes(brand)}
                             onChange={() => toggleBrand(brand)}
-                            className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                            className="w-4 h-4 text-red-600 rounded focus:ring-red-500"
                           />
                           <span className="text-sm text-gray-700">{brand}</span>
                         </label>
@@ -916,7 +916,7 @@ const Collection = () => {
                             priceRange[1],
                           ])
                         }
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-20"
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 w-20"
                       />
                       <span className="text-gray-500">to</span>
                       <input
@@ -929,7 +929,7 @@ const Collection = () => {
                             parseInt(e.target.value) || 10000,
                           ])
                         }
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-20"
+                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 w-20"
                       />
                     </div>
 
@@ -948,8 +948,8 @@ const Collection = () => {
                           onClick={() => setPriceRange([min, max])}
                           className={`px-3 py-2 text-xs rounded-lg border transition-colors ${
                             priceRange[0] === min && priceRange[1] === max
-                              ? "bg-blue-600 text-white border-blue-600"
-                              : "bg-white text-gray-700 border-gray-300 hover:border-blue-300 hover:bg-blue-50"
+                              ? "bg-red-600 text-white border-red-600"
+                              : "bg-white text-gray-700 border-gray-300 hover:border-red-300 hover:bg-red-50"
                           }`}
                         >
                           {min === 0 && max === 10000
@@ -1003,7 +1003,7 @@ const Collection = () => {
                 </p>
                 <button
                   onClick={clearAllFilters}
-                  className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm"
+                  className="bg-red-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors shadow-sm"
                 >
                   Clear All Filters
                 </button>

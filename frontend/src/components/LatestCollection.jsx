@@ -40,7 +40,7 @@ const LatestCollection = () => {
         {/* View More Button */}
         {products.length > 10 && (
           <div className="text-center mt-12">
-            <button className="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+            <button className="px-8 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors">
               View All Products
             </button>
           </div>

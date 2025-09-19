@@ -74,17 +74,17 @@ const Footer = () => {
             {/* Contact Info */}
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <Phone className="h-4 w-4 text-blue-400" />
-                <span className="text-sm text-gray-300">+91 98765 43210</span>
+                <Phone className="h-4 w-4 text-red-400" />
+                <span className="text-sm text-gray-300">+91 92051 63669</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="h-4 w-4 text-blue-400" />
+                <Mail className="h-4 w-4 text-red-400" />
                 <span className="text-sm text-gray-300">
-                  support@gearmates.com
+                  gearmates.info@gmail.com
                 </span>
               </div>
               <div className="flex items-center space-x-3">
-                <MapPin className="h-4 w-4 text-blue-400" />
+                <MapPin className="h-4 w-4 text-red-400" />
                 <span className="text-sm text-gray-300">
                   Budhlada, Punjab, India
                 </span>
@@ -105,7 +105,7 @@ const Footer = () => {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
+                      className="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors"
                     >
                       <IconComponent className="h-4 w-4" />
                     </a>
@@ -123,7 +123,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     to={link.path}
-                    className="text-sm text-gray-400 hover:text-blue-400 transition-colors"
+                    className="text-sm text-gray-400 hover:text-red-400 transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -137,7 +137,7 @@ const Footer = () => {
                 <li key={category.name}>
                   <Link
                     to={category.path}
-                    className="text-sm text-gray-400 hover:text-blue-400 transition-colors flex items-center space-x-2"
+                    className="text-sm text-gray-400 hover:text-red-400 transition-colors flex items-center space-x-2"
                   >
                     <category.icon className="h-3 w-3" />
                     <span>{category.name}</span>
@@ -155,7 +155,7 @@ const Footer = () => {
                 <li key={service.name}>
                   <Link
                     to={service.path}
-                    className="text-sm text-gray-400 hover:text-blue-400 transition-colors"
+                    className="text-sm text-gray-400 hover:text-red-400 transition-colors"
                   >
                     {service.name}
                   </Link>
@@ -172,7 +172,7 @@ const Footer = () => {
                 <li key={item.name}>
                   <Link
                     to={item.path}
-                    className="text-sm text-gray-400 hover:text-blue-400 transition-colors"
+                    className="text-sm text-gray-400 hover:text-red-400 transition-colors"
                   >
                     {item.name}
                   </Link>

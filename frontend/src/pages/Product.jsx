@@ -56,7 +56,7 @@ const Product = () => {
   if (!productData) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
       </div>
     );
   }
@@ -117,7 +117,7 @@ const Product = () => {
                     onClick={() => handleThumbnailClick(image, index)}
                     className={`flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden ${
                       selectedImage === image
-                        ? "border-blue-500"
+                        ? "border-red-500"
                         : "border-gray-200"
                     }`}
                   >
@@ -137,7 +137,7 @@ const Product = () => {
             {/* Brand & Title */}
             <div>
               {productData.brand && (
-                <p className="text-blue-600 text-sm font-medium mb-1">
+                <p className="text-red-600 text-sm font-medium mb-1">
                   {productData.brand}
                 </p>
               )}
@@ -188,7 +188,7 @@ const Product = () => {
                       .slice(0, 4)
                       .map((spec, index) => (
                         <li key={index} className="flex items-center">
-                          <span className="w-1 h-1 bg-blue-500 rounded-full mr-2"></span>
+                          <span className="w-1 h-1 bg-red-500 rounded-full mr-2"></span>
                           {spec}
                         </li>
                       ))}
@@ -275,7 +275,7 @@ const Product = () => {
               <div className="space-y-2">
                 <button
                   onClick={handleAddToCart}
-                  className="w-full bg-blue-600 text-white py-2.5 px-4 rounded font-medium hover:bg-blue-700 transition-colors"
+                  className="w-full bg-red-600 text-white py-2.5 px-4 rounded font-medium hover:bg-red-700 transition-colors"
                 >
                   Add to Cart
                 </button>

@@ -299,7 +299,7 @@ const List = ({ token }) => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
           <p className="text-gray-600 mt-4">Loading products...</p>
         </div>
       </div>
@@ -317,7 +317,7 @@ const List = ({ token }) => {
         {isAnyOperationInProgress && (
           <div className="fixed inset-0 bg-black bg-opacity-20 z-40 flex items-center justify-center pointer-events-auto">
             <div className="bg-white p-6 rounded-lg shadow-lg flex items-center space-x-3">
-              <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
+              <Loader2 className="w-6 h-6 animate-spin text-red-600" />
               <span className="text-gray-700">
                 {deletingProducts.size > 0
                   ? "Deleting product..."
@@ -359,7 +359,7 @@ const List = ({ token }) => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   disabled={isAnyOperationInProgress}
-                  className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
 
@@ -367,7 +367,7 @@ const List = ({ token }) => {
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 disabled={isAnyOperationInProgress}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <option value="">All Categories</option>
                 {Object.keys(categories).map((category) => (
@@ -381,7 +381,7 @@ const List = ({ token }) => {
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 disabled={isAnyOperationInProgress}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <option value="newest">Newest First</option>
                 <option value="name">Name A-Z</option>
@@ -460,7 +460,7 @@ const List = ({ token }) => {
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                           {product.category}
                         </span>
                       </td>
@@ -488,7 +488,7 @@ const List = ({ token }) => {
                           <button
                             onClick={() => handleView(product)}
                             disabled={isAnyOperationInProgress}
-                            className="p-1 text-gray-400 hover:text-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="p-1 text-gray-400 hover:text-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             title="View Product"
                           >
                             <Eye className="w-4 h-4" />
@@ -656,7 +656,7 @@ const List = ({ token }) => {
                       {selectedProduct.compatibility.map((device, index) => (
                         <span
                           key={index}
-                          className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                          className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm"
                         >
                           {device}
                         </span>
@@ -720,7 +720,7 @@ const List = ({ token }) => {
                       setEditFormData({ ...editFormData, name: e.target.value })
                     }
                     disabled={editLoading}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
                     required
                   />
                 </div>
@@ -739,7 +739,7 @@ const List = ({ token }) => {
                       })
                     }
                     disabled={editLoading}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                 </div>
               </div>
@@ -758,7 +758,7 @@ const List = ({ token }) => {
                   }
                   rows={4}
                   disabled={editLoading}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   required
                 />
               </div>
@@ -778,7 +778,7 @@ const List = ({ token }) => {
                       })
                     }
                     disabled={editLoading}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {Object.keys(categories).map((cat) => (
                       <option key={cat} value={cat}>
@@ -801,7 +801,7 @@ const List = ({ token }) => {
                       })
                     }
                     disabled={editLoading}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {categories[editFormData.category]?.map((sub) => (
                       <option key={sub} value={sub}>
@@ -825,7 +825,7 @@ const List = ({ token }) => {
                       })
                     }
                     disabled={editLoading}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
                     min="1"
                     required
                   />
@@ -844,7 +844,7 @@ const List = ({ token }) => {
                       })
                     }
                     disabled={editLoading}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <option value="No warranty">No Warranty</option>
                     <option value="6 months">6 Months</option>
@@ -869,7 +869,7 @@ const List = ({ token }) => {
                       })
                     }
                     disabled={editLoading}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                 </div>
 
@@ -887,7 +887,7 @@ const List = ({ token }) => {
                       })
                     }
                     disabled={editLoading}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                 </div>
               </div>
@@ -913,8 +913,8 @@ const List = ({ token }) => {
                       disabled={editLoading}
                       className={`px-3 py-2 text-sm rounded-lg border transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                         editCompatibility.includes(device)
-                          ? "bg-blue-500 text-white border-blue-500"
-                          : "bg-gray-50 text-gray-700 border-gray-300 hover:border-blue-300"
+                          ? "bg-red-500 text-white border-red-500"
+                          : "bg-gray-50 text-gray-700 border-gray-300 hover:border-red-300"
                       }`}
                     >
                       {device}
@@ -968,7 +968,7 @@ const List = ({ token }) => {
                     })
                   }
                   disabled={editLoading}
-                  className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-4 h-4 text-red-600 rounded focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 />
                 <label
                   htmlFor="editBestseller"
@@ -991,7 +991,7 @@ const List = ({ token }) => {
                 <button
                   type="submit"
                   disabled={editLoading}
-                  className="flex items-center space-x-2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center space-x-2 bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {editLoading ? (
                     <>

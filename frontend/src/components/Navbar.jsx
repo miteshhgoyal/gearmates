@@ -91,8 +91,8 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   `px-3 py-2 text-sm font-medium transition-colors duration-200 ${
                     isActive
-                      ? "text-blue-600 border-b-2 border-blue-600"
-                      : "text-gray-700 hover:text-blue-600"
+                      ? "text-red-600 border-b-2 border-red-600"
+                      : "text-gray-700 hover:text-red-600"
                   }`
                 }
               >
@@ -151,7 +151,7 @@ const Navbar = () => {
               <button className="p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors">
                 <ShoppingCart className="h-5 w-5" />
                 {getCartCount() > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs font-medium rounded-full h-5 w-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-medium rounded-full h-5 w-5 flex items-center justify-center">
                     {getCartCount()}
                   </span>
                 )}

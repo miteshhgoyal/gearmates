@@ -16,7 +16,7 @@ const StatsSection = () => {
       label: "Happy Customers",
       value: "50K+",
       icon: Users,
-      color: "from-blue-500 to-cyan-500",
+      color: "from-red-500 to-orange-500",
     },
     {
       label: "Products Sold",
@@ -34,7 +34,7 @@ const StatsSection = () => {
       label: "Years Experience",
       value: "5+",
       icon: Award,
-      color: "from-purple-500 to-pink-500",
+      color: "from-orange-500 to-orange-500",
     },
   ];
 
@@ -62,7 +62,7 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 py-16 text-white">
+    <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-red-900 to-orange-900 py-16 text-white">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 transform">
@@ -117,7 +117,7 @@ const StatsSection = () => {
             return (
               <div key={index} className="group text-center">
                 <div className="rounded-2xl bg-white/10 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:scale-105">
-                  <IconComponent className="mx-auto mb-4 h-10 w-10 text-blue-400 transition-transform duration-300 group-hover:scale-110" />
+                  <IconComponent className="mx-auto mb-4 h-10 w-10 text-red-400 transition-transform duration-300 group-hover:scale-110" />
                   <h3 className="mb-2 text-lg font-semibold">
                     {feature.title}
                   </h3>

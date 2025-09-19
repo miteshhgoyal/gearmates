@@ -44,8 +44,8 @@ const CartTotal = () => {
 
       {/* Free shipping indicator */}
       {subtotal > 0 && subtotal < 999 && (
-        <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-          <p className="text-sm text-blue-700">
+        <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-sm text-red-700">
             Add {currency}
             {(999 - subtotal).toFixed(2)} more for free shipping
           </p>

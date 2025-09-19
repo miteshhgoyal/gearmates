@@ -233,7 +233,7 @@ const Add = ({ token }) => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {images.map((image, index) => (
                   <div key={index} className="relative">
-                    <div className="aspect-square border-2 border-dashed border-gray-300 rounded-lg overflow-hidden hover:border-blue-500 transition-colors">
+                    <div className="aspect-square border-2 border-dashed border-gray-300 rounded-lg overflow-hidden hover:border-red-500 transition-colors">
                       {image ? (
                         <div className="relative h-full">
                           <img
@@ -289,7 +289,7 @@ const Add = ({ token }) => {
                     type="text"
                     value={formData.name}
                     onChange={(e) => handleInputChange("name", e.target.value)}
-                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${
                       errors.name ? "border-red-500" : "border-gray-300"
                     }`}
                     placeholder="Enter product name"
@@ -307,7 +307,7 @@ const Add = ({ token }) => {
                     type="text"
                     value={formData.brand}
                     onChange={(e) => handleInputChange("brand", e.target.value)}
-                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${
                       errors.brand ? "border-red-500" : "border-gray-300"
                     }`}
                     placeholder="Enter brand name"
@@ -328,7 +328,7 @@ const Add = ({ token }) => {
                     handleInputChange("description", e.target.value)
                   }
                   rows={4}
-                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${
                     errors.description ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Enter detailed product description"
@@ -357,7 +357,7 @@ const Add = ({ token }) => {
                     onChange={(e) =>
                       handleInputChange("category", e.target.value)
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     {Object.keys(categories).map((cat) => (
                       <option key={cat} value={cat}>
@@ -376,7 +376,7 @@ const Add = ({ token }) => {
                     onChange={(e) =>
                       handleInputChange("subCategory", e.target.value)
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     {categories[formData.category]?.map((sub) => (
                       <option key={sub} value={sub}>
@@ -394,7 +394,7 @@ const Add = ({ token }) => {
                     type="number"
                     value={formData.price}
                     onChange={(e) => handleInputChange("price", e.target.value)}
-                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${
                       errors.price ? "border-red-500" : "border-gray-300"
                     }`}
                     placeholder="299"
@@ -414,7 +414,7 @@ const Add = ({ token }) => {
                     onChange={(e) =>
                       handleInputChange("warranty", e.target.value)
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     <option value="No warranty">No Warranty</option>
                     <option value="6 months">6 Months</option>
@@ -440,7 +440,7 @@ const Add = ({ token }) => {
                     type="text"
                     value={formData.color}
                     onChange={(e) => handleInputChange("color", e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                     placeholder="e.g., Black, Blue, Transparent"
                   />
                 </div>
@@ -455,7 +455,7 @@ const Add = ({ token }) => {
                     onChange={(e) =>
                       handleInputChange("material", e.target.value)
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                     placeholder="e.g., Silicone, TPU, Tempered Glass"
                   />
                 </div>
@@ -482,8 +482,8 @@ const Add = ({ token }) => {
                       }
                       className={`px-3 py-2 text-sm rounded-lg border transition-colors ${
                         compatibility.includes(device)
-                          ? "bg-blue-500 text-white border-blue-500"
-                          : "bg-gray-50 text-gray-700 border-gray-300 hover:border-blue-300"
+                          ? "bg-red-500 text-white border-red-500"
+                          : "bg-gray-50 text-gray-700 border-gray-300 hover:border-red-300"
                       }`}
                     >
                       {device}
@@ -526,7 +526,7 @@ const Add = ({ token }) => {
                 onChange={(e) =>
                   handleInputChange("bestseller", e.target.checked)
                 }
-                className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                className="w-4 h-4 text-red-600 rounded focus:ring-red-500"
               />
               <label
                 htmlFor="bestseller"
@@ -541,7 +541,7 @@ const Add = ({ token }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center space-x-2 bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>

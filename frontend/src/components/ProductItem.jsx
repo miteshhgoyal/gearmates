@@ -77,7 +77,7 @@ const ProductItem = ({
                 )}
               </div>
 
-              <h3 className="font-semibold text-gray-900 text-sm mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+              <h3 className="font-semibold text-gray-900 text-sm mb-2 line-clamp-2 group-hover:text-red-600 transition-colors">
                 {name}
               </h3>
 
@@ -129,7 +129,7 @@ const ProductItem = ({
               <button
                 onClick={handleAddToCart}
                 disabled={isLoading}
-                className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors disabled:opacity-50"
+                className="p-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors disabled:opacity-50"
               >
                 {isLoading ? (
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -196,7 +196,7 @@ const ProductItem = ({
           <button
             onClick={handleAddToCart}
             disabled={isLoading}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 text-sm"
+            className="w-full bg-red-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-red-700 transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 text-sm"
           >
             {isLoading ? (
               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -215,14 +215,14 @@ const ProductItem = ({
       <div className="p-3 space-y-2">
         {/* Category & Brand - Mobile layout */}
         <div className="flex items-center justify-between text-xs">
-          <span className="text-blue-600 font-medium truncate">{category}</span>
+          <span className="text-red-600 font-medium truncate">{category}</span>
           {brand && (
             <span className="text-gray-500 truncate ml-2">{brand}</span>
           )}
         </div>
 
         {/* Product Name - Mobile optimized */}
-        <h3 className="font-semibold text-gray-900 line-clamp-2 text-sm leading-tight group-hover:text-blue-600 transition-colors min-h-[2.5rem]">
+        <h3 className="font-semibold text-gray-900 line-clamp-2 text-sm leading-tight group-hover:text-red-600 transition-colors min-h-[2.5rem]">
           {name}
         </h3>
 

@@ -48,8 +48,8 @@ const Orders = ({ token }) => {
 
   const statusColors = {
     "Order Placed": "bg-yellow-100 text-yellow-800 border-yellow-200",
-    Packing: "bg-blue-100 text-blue-800 border-blue-200",
-    Shipped: "bg-purple-100 text-purple-800 border-purple-200",
+    Packing: "bg-red-100 text-red-800 border-red-200",
+    Shipped: "bg-orange-100 text-orange-800 border-orange-200",
     "Out for delivery": "bg-orange-100 text-orange-800 border-orange-200",
     Delivered: "bg-green-100 text-green-800 border-green-200",
   };
@@ -225,7 +225,7 @@ const Orders = ({ token }) => {
                   placeholder="Search orders..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
               </div>
             </div>
@@ -237,7 +237,7 @@ const Orders = ({ token }) => {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
               >
                 <option value="">All Status</option>
                 {statusOptions.map((status) => (
@@ -255,7 +255,7 @@ const Orders = ({ token }) => {
               <select
                 value={paymentFilter}
                 onChange={(e) => setPaymentFilter(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
               >
                 <option value="">All Payments</option>
                 <option value="paid">Paid</option>
@@ -267,7 +267,7 @@ const Orders = ({ token }) => {
           <div className="p-4 border-t border-gray-200 bg-gray-50">
             <button
               onClick={() => setShowMobileFilters(false)}
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium"
+              className="w-full bg-red-600 text-white py-3 px-4 rounded-lg font-medium"
             >
               Apply Filters ({filteredOrders.length} results)
             </button>
@@ -281,7 +281,7 @@ const Orders = ({ token }) => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
           <p className="text-gray-600 mt-4">Loading orders...</p>
         </div>
       </div>
@@ -303,7 +303,7 @@ const Orders = ({ token }) => {
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => setShowMobileFilters(true)}
-                className="flex items-center space-x-2 bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-medium"
+                className="flex items-center space-x-2 bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-medium"
               >
                 <Filter className="w-4 h-4" />
                 <span>Filter</span>
@@ -332,11 +332,11 @@ const Orders = ({ token }) => {
               </p>
               <p className="text-xs text-yellow-600">Pending</p>
             </div>
-            <div className="bg-purple-50 p-3 rounded-lg text-center">
-              <p className="text-lg font-bold text-purple-700">
+            <div className="bg-orange-50 p-3 rounded-lg text-center">
+              <p className="text-lg font-bold text-orange-700">
                 ₹{Math.floor(stats.totalRevenue / 1000)}k
               </p>
-              <p className="text-xs text-purple-600">Revenue</p>
+              <p className="text-xs text-orange-600">Revenue</p>
             </div>
           </div>
 
@@ -353,7 +353,7 @@ const Orders = ({ token }) => {
                 onClick={() => setActiveTab(key)}
                 className={`flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors ${
                   activeTab === key
-                    ? "bg-white text-blue-600 shadow-sm"
+                    ? "bg-white text-red-600 shadow-sm"
                     : "text-gray-600"
                 }`}
               >
@@ -378,7 +378,7 @@ const Orders = ({ token }) => {
                 </p>
               </div>
               <div className="flex items-center space-x-2">
-                <button className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                <button className="flex items-center space-x-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
                   <Download className="w-4 h-4" />
                   <span>Export</span>
                 </button>
@@ -419,22 +419,22 @@ const Orders = ({ token }) => {
                 </p>
               </div>
 
-              <div className="bg-blue-50 p-4 rounded-lg">
+              <div className="bg-red-50 p-4 rounded-lg">
                 <div className="flex items-center space-x-2">
-                  <CreditCard className="w-5 h-5 text-blue-600" />
-                  <span className="text-sm text-blue-600">Paid</span>
+                  <CreditCard className="w-5 h-5 text-red-600" />
+                  <span className="text-sm text-red-600">Paid</span>
                 </div>
-                <p className="text-2xl font-bold text-blue-700 mt-1">
+                <p className="text-2xl font-bold text-red-700 mt-1">
                   {stats.paid}
                 </p>
               </div>
 
-              <div className="bg-purple-50 p-4 rounded-lg col-span-2 md:col-span-1">
+              <div className="bg-orange-50 p-4 rounded-lg col-span-2 md:col-span-1">
                 <div className="flex items-center space-x-2">
-                  <TrendingUp className="w-5 h-5 text-purple-600" />
-                  <span className="text-sm text-purple-600">Revenue</span>
+                  <TrendingUp className="w-5 h-5 text-orange-600" />
+                  <span className="text-sm text-orange-600">Revenue</span>
                 </div>
-                <p className="text-2xl font-bold text-purple-700 mt-1">
+                <p className="text-2xl font-bold text-orange-700 mt-1">
                   {currency}
                   {stats.totalRevenue.toLocaleString()}
                 </p>
@@ -452,14 +452,14 @@ const Orders = ({ token }) => {
                   placeholder="Search by customer, phone, order ID, or product name..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
               </div>
 
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
               >
                 <option value="">All Status</option>
                 {statusOptions.map((status) => (
@@ -472,7 +472,7 @@ const Orders = ({ token }) => {
               <select
                 value={paymentFilter}
                 onChange={(e) => setPaymentFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
               >
                 <option value="">All Payments</option>
                 <option value="paid">Paid</option>
@@ -583,7 +583,7 @@ const Orders = ({ token }) => {
                         <select
                           onChange={(event) => statusHandler(event, order._id)}
                           value={order.status}
-                          className="text-xs px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+                          className="text-xs px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
                         >
                           {statusOptions.map((status) => (
                             <option key={status} value={status}>
@@ -595,7 +595,7 @@ const Orders = ({ token }) => {
 
                       <button
                         onClick={() => toggleOrderExpansion(order._id)}
-                        className="flex items-center space-x-1 text-blue-600 text-sm font-medium"
+                        className="flex items-center space-x-1 text-red-600 text-sm font-medium"
                       >
                         <span>{isExpanded ? "Less" : "More"}</span>
                         {isExpanded ? (
@@ -728,7 +728,7 @@ const Orders = ({ token }) => {
                                       <span className="hidden lg:inline">
                                         •
                                       </span>
-                                      <span className="text-blue-600 text-xs bg-blue-50 px-2 py-1 rounded w-fit mt-1 lg:mt-0">
+                                      <span className="text-red-600 text-xs bg-red-50 px-2 py-1 rounded w-fit mt-1 lg:mt-0">
                                         {item.category}
                                       </span>
                                     </>
@@ -850,7 +850,7 @@ const Orders = ({ token }) => {
                               statusHandler(event, order._id)
                             }
                             value={order.status}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 text-sm"
                           >
                             {statusOptions.map((status) => (
                               <option key={status} value={status}>

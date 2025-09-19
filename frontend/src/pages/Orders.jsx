@@ -150,10 +150,10 @@ const Orders = () => {
   const getStatusConfig = (status) => {
     const configs = {
       "Order Placed": {
-        color: "bg-blue-500",
+        color: "bg-red-500",
         icon: Clock,
-        bgColor: "bg-blue-50",
-        textColor: "text-blue-700",
+        bgColor: "bg-red-50",
+        textColor: "text-red-700",
         progress: 20,
       },
       Packing: {
@@ -164,10 +164,10 @@ const Orders = () => {
         progress: 40,
       },
       Shipped: {
-        color: "bg-purple-500",
+        color: "bg-orange-500",
         icon: Truck,
-        bgColor: "bg-purple-50",
-        textColor: "text-purple-700",
+        bgColor: "bg-orange-50",
+        textColor: "text-orange-700",
         progress: 70,
       },
       "Out for delivery": {
@@ -214,7 +214,7 @@ const Orders = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading your orders...</p>
         </div>
       </div>
@@ -245,7 +245,7 @@ const Orders = () => {
 
             <button
               onClick={() => (window.location.href = "/collection")}
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
             >
               Start Shopping
             </button>
@@ -270,7 +270,7 @@ const Orders = () => {
             <div className="flex items-center space-x-2">
               <button
                 onClick={loadOrderData}
-                className="p-2 bg-blue-600 text-white rounded-lg"
+                className="p-2 bg-red-600 text-white rounded-lg"
               >
                 <RefreshCw className="w-4 h-4" />
               </button>
@@ -285,7 +285,7 @@ const Orders = () => {
                 onClick={() => setActiveFilter(option.key)}
                 className={`flex-shrink-0 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                   activeFilter === option.key
-                    ? "bg-white text-blue-600 shadow-sm"
+                    ? "bg-white text-red-600 shadow-sm"
                     : "text-gray-600"
                 }`}
               >
@@ -315,7 +315,7 @@ const Orders = () => {
                   onClick={() => setActiveFilter(option.key)}
                   className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                     activeFilter === option.key
-                      ? "bg-blue-100 text-blue-700"
+                      ? "bg-red-100 text-red-700"
                       : "text-gray-600 hover:text-gray-900"
                   }`}
                 >
@@ -332,12 +332,12 @@ const Orders = () => {
                   placeholder="Search orders..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm w-64"
+                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 text-sm w-64"
                 />
               </div>
               <button
                 onClick={loadOrderData}
-                className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                className="flex items-center space-x-2 bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
               >
                 <RefreshCw className="w-4 h-4" />
                 <span>Refresh</span>
@@ -449,7 +449,7 @@ const Orders = () => {
                         onClick={() =>
                           toggleOrderExpansion(item.orderId + index)
                         }
-                        className="flex items-center space-x-1 text-blue-600 text-sm font-medium"
+                        className="flex items-center space-x-1 text-red-600 text-sm font-medium"
                       >
                         <span>{isExpanded ? "Less" : "More"}</span>
                         {isExpanded ? (
@@ -549,7 +549,7 @@ const Orders = () => {
                             {item.name}
                           </h3>
                           {item.brand && (
-                            <p className="text-sm text-blue-600 mb-2">
+                            <p className="text-sm text-red-600 mb-2">
                               {item.brand}
                             </p>
                           )}
@@ -647,7 +647,7 @@ const Orders = () => {
 
                       {/* Action Buttons */}
                       <div className="space-y-2">
-                        <button className="w-full flex items-center justify-center space-x-2 bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+                        <button className="w-full flex items-center justify-center space-x-2 bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
                           <RotateCcw className="w-4 h-4" />
                           <span>Track Order</span>
                         </button>
@@ -694,15 +694,15 @@ const Orders = () => {
 
       {/* Help Section */}
       <div className="px-4 lg:px-0 lg:max-w-6xl lg:mx-auto pb-6">
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 lg:p-8 border border-blue-100">
+        <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl p-6 lg:p-8 border border-red-100">
           <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-            <HelpCircle className="w-5 h-5 mr-2 text-blue-600" />
+            <HelpCircle className="w-5 h-5 mr-2 text-red-600" />
             Need Help?
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
             <div className="flex items-center space-x-3 bg-white bg-opacity-50 p-4 rounded-lg">
-              <Phone className="w-5 h-5 text-blue-600" />
+              <Phone className="w-5 h-5 text-red-600" />
               <div>
                 <p className="font-medium text-gray-900">Call Support</p>
                 <p className="text-gray-600">+91-XXXXX-XXXXX</p>
@@ -718,7 +718,7 @@ const Orders = () => {
             </div>
 
             <div className="flex items-center space-x-3 bg-white bg-opacity-50 p-4 rounded-lg">
-              <Truck className="w-5 h-5 text-purple-600" />
+              <Truck className="w-5 h-5 text-orange-600" />
               <div>
                 <p className="font-medium text-gray-900">Free Shipping</p>
                 <p className="text-gray-600">On orders ₹999+</p>

@@ -37,7 +37,7 @@ const FeaturedProducts = () => {
     }
 
     if (product.specifications?.includes("Fast Charging")) {
-      badges.push({ icon: Zap, label: "Fast Charge", color: "bg-blue-500" });
+      badges.push({ icon: Zap, label: "Fast Charge", color: "bg-red-500" });
     }
 
     if (product.warranty && product.warranty !== "No warranty") {
@@ -120,7 +120,7 @@ const FeaturedProducts = () => {
         <div className="p-6">
           {/* Category & Brand */}
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-sm font-medium text-blue-600">
+            <span className="text-sm font-medium text-red-600">
               {product.category}
             </span>
             {product.brand && (
@@ -130,7 +130,7 @@ const FeaturedProducts = () => {
 
           {/* Product Name */}
           <Link to={`/product/${product._id}`}>
-            <h3 className="mb-2 text-lg font-bold text-gray-900 transition-colors hover:text-blue-600 line-clamp-2">
+            <h3 className="mb-2 text-lg font-bold text-gray-900 transition-colors hover:text-red-600 line-clamp-2">
               {product.name}
             </h3>
           </Link>
@@ -174,7 +174,7 @@ const FeaturedProducts = () => {
 
             <button
               onClick={() => addToCart(product._id)}
-              className="group/btn flex items-center rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-2 font-medium text-white transition-all duration-300 hover:from-blue-700 hover:to-purple-700"
+              className="group/btn flex items-center rounded-xl bg-gradient-to-r from-red-600 to-orange-600 px-4 py-2 font-medium text-white transition-all duration-300 hover:from-red-700 hover:to-orange-700"
             >
               <ShoppingCart className="mr-2 h-4 w-4 transition-transform group-hover/btn:scale-110" />
               Add
@@ -192,7 +192,7 @@ const FeaturedProducts = () => {
         <div className="mb-12 text-center">
           <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
             Featured{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
               Products
             </span>
           </h2>
@@ -221,7 +221,7 @@ const FeaturedProducts = () => {
         <div className="mt-12 text-center">
           <Link
             to="/collection"
-            className="inline-flex items-center rounded-xl border-2 border-blue-600 px-8 py-4 font-semibold text-blue-600 transition-all duration-300 hover:bg-blue-600 hover:text-white"
+            className="inline-flex items-center rounded-xl border-2 border-red-600 px-8 py-4 font-semibold text-red-600 transition-all duration-300 hover:bg-red-600 hover:text-white"
           >
             View All Products
             <ArrowRight className="ml-2 h-5 w-5" />

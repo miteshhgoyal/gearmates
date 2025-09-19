@@ -26,10 +26,10 @@ const Login = ({ setToken }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center w-full px-4 py-8 bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen flex items-center justify-center w-full px-4 py-8 bg-gradient-to-br from-red-50 to-orange-100">
       <div className="bg-white shadow-lg rounded-lg px-6 py-8 w-full max-w-md mx-4 sm:px-8">
         <div className="text-center mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
             GearMates
           </h1>
           <p className="text-gray-600 text-sm">Admin Panel Login</p>
@@ -43,7 +43,7 @@ const Login = ({ setToken }) => {
             <input
               onChange={(e) => setEmail(e.target.value)}
               value={email}
-              className="w-full px-3 py-3 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-3 py-3 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200"
               type="email"
               placeholder="your@email.com"
               required
@@ -57,7 +57,7 @@ const Login = ({ setToken }) => {
             <input
               onChange={(e) => setPassword(e.target.value)}
               value={password}
-              className="w-full px-3 py-3 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-3 py-3 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200"
               type="password"
               placeholder="Enter your password"
               required
@@ -65,7 +65,7 @@ const Login = ({ setToken }) => {
           </div>
 
           <button
-            className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-md hover:from-blue-700 hover:to-indigo-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 mt-6"
+            className="w-full py-3 px-4 bg-gradient-to-r from-red-600 to-orange-600 text-white font-medium rounded-md hover:from-red-700 hover:to-orange-700 focus:ring-4 focus:ring-red-200 transition-all duration-200 mt-6"
             type="submit"
           >
             Sign In

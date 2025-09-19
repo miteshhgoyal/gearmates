@@ -16,16 +16,16 @@ const Categories = () => {
       icon: Smartphone,
       count: "200+",
       path: "/collection/mobile",
-      color: "from-blue-500 to-blue-600",
-      bgColor: "bg-blue-50",
+      color: "from-red-500 to-red-600",
+      bgColor: "bg-red-50",
     },
     {
       name: "Audio & Headphones",
       icon: Headphones,
       count: "150+",
       path: "/collection/audio",
-      color: "from-purple-500 to-purple-600",
-      bgColor: "bg-purple-50",
+      color: "from-orange-500 to-orange-600",
+      bgColor: "bg-orange-50",
     },
     {
       name: "Power & Charging",
@@ -56,8 +56,8 @@ const Categories = () => {
       icon: HardDrive,
       count: "40+",
       path: "/collection/storage",
-      color: "from-indigo-500 to-indigo-600",
-      bgColor: "bg-indigo-50",
+      color: "from-orange-500 to-orange-600",
+      bgColor: "bg-orange-50",
     },
   ];
 

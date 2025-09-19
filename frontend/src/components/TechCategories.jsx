@@ -77,7 +77,7 @@ const CategoryCard = ({ category }) => {
   return (
     <div className="group relative">
       <Link to={category.queryPath} className="block">
-        <div className="relative overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-700 ease-out hover:-translate-y-3 hover:shadow-2xl hover:shadow-blue-500/10">
+        <div className="relative overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-700 ease-out hover:-translate-y-3 hover:shadow-2xl hover:shadow-red-500/10">
           {/* Image Container with Enhanced Overlay */}
           <div className="relative h-56 overflow-hidden">
             <img
@@ -131,7 +131,7 @@ const CategoryCard = ({ category }) => {
           <div className="p-6">
             <div className="mb-3 flex items-start justify-between">
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-gray-900 transition-colors group-hover:text-blue-600 mb-2">
+                <h3 className="text-xl font-bold text-gray-900 transition-colors group-hover:text-red-600 mb-2">
                   {category.name}
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
@@ -139,15 +139,15 @@ const CategoryCard = ({ category }) => {
                 </p>
               </div>
               <div className="ml-4 flex-shrink-0">
-                <div className="rounded-full bg-blue-50 p-2 transition-all duration-300 group-hover:bg-blue-100 group-hover:scale-110">
-                  <ArrowRight className="h-5 w-5 text-blue-600 transition-transform group-hover:translate-x-1" />
+                <div className="rounded-full bg-red-50 p-2 transition-all duration-300 group-hover:bg-red-100 group-hover:scale-110">
+                  <ArrowRight className="h-5 w-5 text-red-600 transition-transform group-hover:translate-x-1" />
                 </div>
               </div>
             </div>
           </div>
 
           {/* Subtle bottom accent */}
-          <div className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          <div className="h-1 bg-gradient-to-r from-red-500 via-orange-500 to-orange-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         </div>
       </Link>
     </div>
@@ -170,13 +170,13 @@ const TechCategories = () => {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Enhanced Header */}
         <div className="mb-16 text-center">
-          <div className="inline-flex items-center rounded-full bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 mb-4">
+          <div className="inline-flex items-center rounded-full bg-red-50 px-4 py-2 text-sm font-semibold text-red-600 mb-4">
             <ShoppingBag className="mr-2 h-4 w-4" />
             Premium Tech Store
           </div>
           <h2 className="mb-6 text-4xl font-bold text-gray-900 md:text-5xl lg:text-6xl">
             Shop by{" "}
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-red-600 via-orange-600 to-orange-600 bg-clip-text text-transparent">
               Category
             </span>
           </h2>
@@ -202,11 +202,11 @@ const TechCategories = () => {
 
         {/* Enhanced CTA Section */}
         <div className="mt-20 text-center">
-          <div className="rounded-3xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 p-8 shadow-2xl">
+          <div className="rounded-3xl bg-gradient-to-r from-red-600 via-orange-600 to-orange-600 p-8 shadow-2xl">
             <h3 className="mb-4 text-2xl font-bold text-white">
               Can't find what you're looking for?
             </h3>
-            <p className="mb-6 text-blue-100">
+            <p className="mb-6 text-red-100">
               Explore our complete collection with advanced filters and search
               options
             </p>

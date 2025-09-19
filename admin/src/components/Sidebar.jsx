@@ -80,13 +80,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 onClick={() => setSidebarOpen(false)}
                 className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
                   isActive
-                    ? "bg-blue-50 text-blue-700 border-r-2 border-blue-700"
+                    ? "bg-red-50 text-red-700 border-r-2 border-red-700"
                     : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                 }`}
               >
                 <IconComponent
                   className={`w-5 h-5 ${
-                    isActive ? "text-blue-700" : "text-gray-500"
+                    isActive ? "text-red-700" : "text-gray-500"
                   }`}
                 />
                 <span className="font-medium">{item.label}</span>

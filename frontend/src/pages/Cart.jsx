@@ -72,7 +72,7 @@ const Cart = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => navigate("/collection")}
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2"
+              className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors flex items-center justify-center space-x-2"
             >
               <Package className="w-5 h-5" />
               <span>Start Shopping</span>
@@ -108,7 +108,7 @@ const Cart = () => {
             {/* Cart Items Header */}
             <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
               <div className="flex items-center space-x-2">
-                <ShoppingCart className="w-5 h-5 text-blue-600" />
+                <ShoppingCart className="w-5 h-5 text-red-600" />
                 <h2 className="text-lg font-semibold text-gray-900">
                   Cart Items
                 </h2>
@@ -157,7 +157,7 @@ const Cart = () => {
                               {productData.name}
                             </h3>
                             {productData.brand && (
-                              <p className="text-xs text-blue-600 mb-1">
+                              <p className="text-xs text-red-600 mb-1">
                                 {productData.brand}
                               </p>
                             )}
@@ -262,7 +262,7 @@ const Cart = () => {
                           {productData.name}
                         </h3>
                         {productData.brand && (
-                          <p className="text-sm text-blue-600 mb-1">
+                          <p className="text-sm text-red-600 mb-1">
                             {productData.brand}
                           </p>
                         )}
@@ -345,7 +345,7 @@ const Cart = () => {
             <div className="mt-6 lg:mt-8 pt-4 lg:pt-6 border-t border-gray-200">
               <button
                 onClick={() => navigate("/collection")}
-                className="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center space-x-2"
+                className="text-red-600 hover:text-red-800 font-medium text-sm flex items-center space-x-2"
               >
                 <ArrowRight className="w-4 h-4 rotate-180" />
                 <span>Continue Shopping</span>
@@ -364,7 +364,7 @@ const Cart = () => {
               <div className="mt-6 space-y-3">
                 <button
                   onClick={() => navigate("/place-order")}
-                  className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2"
+                  className="w-full bg-red-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-red-700 transition-colors flex items-center justify-center space-x-2"
                 >
                   <span>Proceed to Checkout</span>
                   <ArrowRight className="w-5 h-5" />

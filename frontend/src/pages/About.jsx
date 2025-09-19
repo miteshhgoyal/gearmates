@@ -56,7 +56,7 @@ const About = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-gray-50 to-blue-50 pt-16 pb-12">
+      <div className="bg-gradient-to-br from-gray-50 to-red-50 pt-16 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Title
             text1="ABOUT"
@@ -76,7 +76,7 @@ const About = () => {
               src={assets.about_image}
               alt="GearMates Tech Accessories Store"
             />
-            <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-2xl shadow-lg">
+            <div className="absolute -bottom-6 -right-6 bg-red-600 text-white p-6 rounded-2xl shadow-lg">
               <p className="text-2xl font-bold">5+ Years</p>
               <p className="text-sm">Serving Tech Enthusiasts</p>
             </div>
@@ -99,7 +99,7 @@ const About = () => {
               cutting-edge chargers, every item in our collection is chosen for
               quality, functionality, and style.
             </p>
-            <div className="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-600">
+            <div className="bg-red-50 p-6 rounded-xl border-l-4 border-red-600">
               <h4 className="font-bold text-gray-900 text-lg mb-2">
                 Our Mission
               </h4>
@@ -117,7 +117,7 @@ const About = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">
+                <div className="text-3xl md:text-4xl font-bold text-red-400 mb-2">
                   {stat.number}
                 </div>
                 <div className="text-gray-300 text-sm font-medium">
@@ -142,10 +142,10 @@ const About = () => {
               return (
                 <div
                   key={index}
-                  className="group hover:shadow-xl transition-all duration-300 p-6 rounded-2xl border border-gray-100 hover:border-blue-200 bg-white"
+                  className="group hover:shadow-xl transition-all duration-300 p-6 rounded-2xl border border-gray-100 hover:border-red-200 bg-white"
                 >
-                  <div className="bg-blue-100 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
-                    <IconComponent className="h-7 w-7 text-blue-600 group-hover:text-white transition-colors" />
+                  <div className="bg-red-100 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-600 transition-colors">
+                    <IconComponent className="h-7 w-7 text-red-600 group-hover:text-white transition-colors" />
                   </div>
                   <h4 className="text-xl font-bold text-gray-900 mb-4">
                     {feature.title}
@@ -172,8 +172,8 @@ const About = () => {
               const IconComponent = value.icon;
               return (
                 <div key={index} className="text-center p-6">
-                  <div className="bg-gradient-to-br from-blue-100 to-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <IconComponent className="h-8 w-8 text-blue-600" />
+                  <div className="bg-gradient-to-br from-red-100 to-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <IconComponent className="h-8 w-8 text-red-600" />
                   </div>
                   <h4 className="text-xl font-bold text-gray-900 mb-4">
                     {value.title}
@@ -188,19 +188,19 @@ const About = () => {
         </div>
 
         {/* Call to Action Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-12 text-center text-white">
+        <div className="bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl p-12 text-center text-white">
           <h3 className="text-3xl font-bold mb-4">
             Ready to Upgrade Your Tech Experience?
           </h3>
-          <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-red-100 text-lg mb-8 max-w-2xl mx-auto">
             Discover our curated collection of premium tech accessories designed
             to enhance your digital lifestyle.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+            <button className="bg-white text-red-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors">
               Shop Now
             </button>
-            <button className="border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition-colors">
+            <button className="border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-red-600 transition-colors">
               Contact Us
             </button>
           </div>

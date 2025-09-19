@@ -170,7 +170,7 @@ const AddressModal = ({
                   name="firstName"
                   value={addressData.firstName}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${
                     errors.firstName ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Enter first name"
@@ -191,7 +191,7 @@ const AddressModal = ({
                   name="lastName"
                   value={addressData.lastName}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${
                     errors.lastName ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Enter last name"
@@ -210,7 +210,7 @@ const AddressModal = ({
                   name="email"
                   value={addressData.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${
                     errors.email ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Enter email"
@@ -229,7 +229,7 @@ const AddressModal = ({
                   value={addressData.street}
                   onChange={handleChange}
                   rows={3}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 resize-none ${
                     errors.street ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Enter complete address"
@@ -248,7 +248,7 @@ const AddressModal = ({
                   name="city"
                   value={addressData.city}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${
                     errors.city ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Enter city"
@@ -267,7 +267,7 @@ const AddressModal = ({
                   name="state"
                   value={addressData.state}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${
                     errors.state ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Enter state"
@@ -287,7 +287,7 @@ const AddressModal = ({
                   value={addressData.zipcode}
                   onChange={handleChange}
                   maxLength={6}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${
                     errors.zipcode ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="6-digit pincode"
@@ -307,7 +307,7 @@ const AddressModal = ({
                   value={addressData.phone}
                   onChange={handleChange}
                   maxLength={10}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 ${
                     errors.phone ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="10-digit mobile number"
@@ -333,7 +333,7 @@ const AddressModal = ({
                         value={label}
                         checked={addressData.label === label}
                         onChange={handleChange}
-                        className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                        className="w-4 h-4 text-red-600 border-gray-300 focus:ring-red-500"
                       />
                       <span className="ml-2 text-sm text-gray-700">
                         {label}
@@ -350,7 +350,7 @@ const AddressModal = ({
                     name="isDefault"
                     checked={addressData.isDefault}
                     onChange={handleChange}
-                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    className="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500"
                   />
                   <span className="ml-2 text-sm text-gray-700">
                     Set as default address
@@ -372,7 +372,7 @@ const AddressModal = ({
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors flex items-center justify-center space-x-2"
+              className="flex-1 px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 disabled:opacity-50 transition-colors flex items-center justify-center space-x-2"
             >
               {loading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
@@ -651,7 +651,7 @@ const PlaceOrder = () => {
   if (profileLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-red-600" />
       </div>
     );
   }
@@ -695,7 +695,7 @@ const PlaceOrder = () => {
               <div className="p-4 lg:p-6 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <MapPin className="w-5 h-5 text-blue-600" />
+                    <MapPin className="w-5 h-5 text-red-600" />
                     <h2 className="text-lg font-semibold text-gray-900">
                       Delivery Address
                     </h2>
@@ -706,7 +706,7 @@ const PlaceOrder = () => {
                       setEditingAddress(null);
                       setShowAddressModal(true);
                     }}
-                    className="flex items-center space-x-2 text-blue-600 hover:text-blue-800 font-medium text-sm lg:text-base"
+                    className="flex items-center space-x-2 text-red-600 hover:text-red-800 font-medium text-sm lg:text-base"
                   >
                     <Plus className="w-4 h-4" />
                     <span className="hidden sm:inline">Add New</span>
@@ -732,7 +732,7 @@ const PlaceOrder = () => {
                         setEditingAddress(null);
                         setShowAddressModal(true);
                       }}
-                      className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                      className="bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors"
                     >
                       Add Address
                     </button>
@@ -744,7 +744,7 @@ const PlaceOrder = () => {
                         key={address._id}
                         className={`border-2 rounded-lg transition-all cursor-pointer ${
                           selectedAddress?._id === address._id
-                            ? "border-blue-500 bg-blue-50"
+                            ? "border-red-500 bg-red-50"
                             : "border-gray-200 hover:border-gray-300"
                         }`}
                         onClick={() => setSelectedAddress(address)}
@@ -755,7 +755,7 @@ const PlaceOrder = () => {
                             <div
                               className={`w-5 h-5 rounded-full border-2 mt-1 flex-shrink-0 ${
                                 selectedAddress?._id === address._id
-                                  ? "border-blue-500 bg-blue-500"
+                                  ? "border-red-500 bg-red-500"
                                   : "border-gray-300"
                               }`}
                             >
@@ -778,7 +778,7 @@ const PlaceOrder = () => {
                                       address.label === "Home"
                                         ? "bg-green-100 text-green-800"
                                         : address.label === "Work"
-                                        ? "bg-blue-100 text-blue-800"
+                                        ? "bg-red-100 text-red-800"
                                         : "bg-gray-100 text-gray-800"
                                     }`}
                                   >
@@ -800,7 +800,7 @@ const PlaceOrder = () => {
                                       setEditingAddress(address);
                                       setShowAddressModal(true);
                                     }}
-                                    className="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+                                    className="p-2 text-gray-400 hover:text-red-600 transition-colors"
                                     title="Edit address"
                                   >
                                     <Edit2 className="w-4 h-4" />
@@ -840,7 +840,7 @@ const PlaceOrder = () => {
                                     e.stopPropagation();
                                     handleSetDefault(address._id);
                                   }}
-                                  className="mt-2 text-xs text-blue-600 hover:text-blue-800 font-medium"
+                                  className="mt-2 text-xs text-red-600 hover:text-red-800 font-medium"
                                 >
                                   Set as default
                                 </button>
@@ -856,7 +856,7 @@ const PlaceOrder = () => {
                               <div
                                 className={`w-4 h-4 rounded-full border-2 mt-1 ${
                                   selectedAddress?._id === address._id
-                                    ? "border-blue-500 bg-blue-500"
+                                    ? "border-red-500 bg-red-500"
                                     : "border-gray-300"
                                 }`}
                               >
@@ -875,7 +875,7 @@ const PlaceOrder = () => {
                                       address.label === "Home"
                                         ? "bg-green-100 text-green-800"
                                         : address.label === "Work"
-                                        ? "bg-blue-100 text-blue-800"
+                                        ? "bg-red-100 text-red-800"
                                         : "bg-gray-100 text-gray-800"
                                     }`}
                                   >
@@ -922,7 +922,7 @@ const PlaceOrder = () => {
                                   setEditingAddress(address);
                                   setShowAddressModal(true);
                                 }}
-                                className="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+                                className="p-2 text-gray-400 hover:text-red-600 transition-colors"
                                 title="Edit address"
                               >
                                 <Edit2 className="w-4 h-4" />
@@ -951,7 +951,7 @@ const PlaceOrder = () => {
             {/* Payment Method */}
             <div className="bg-white rounded-lg lg:rounded-xl border border-gray-200 p-4 lg:p-6">
               <div className="flex items-center space-x-2 mb-6">
-                <CreditCard className="w-5 h-5 text-blue-600" />
+                <CreditCard className="w-5 h-5 text-red-600" />
                 <h2 className="text-lg font-semibold text-gray-900">
                   Payment Method
                 </h2>
@@ -962,7 +962,7 @@ const PlaceOrder = () => {
                   onClick={() => setMethod("razorpay")}
                   className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
                     method === "razorpay"
-                      ? "border-blue-500 bg-blue-50"
+                      ? "border-red-500 bg-red-50"
                       : "border-gray-200 hover:border-gray-300"
                   }`}
                 >
@@ -970,7 +970,7 @@ const PlaceOrder = () => {
                     <div
                       className={`w-4 h-4 rounded-full border-2 ${
                         method === "razorpay"
-                          ? "border-blue-500 bg-blue-500"
+                          ? "border-red-500 bg-red-500"
                           : "border-gray-300"
                       }`}
                     >
@@ -979,8 +979,8 @@ const PlaceOrder = () => {
                       )}
                     </div>
                     <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center">
-                        <CreditCard className="w-4 h-4 text-blue-600" />
+                      <div className="w-8 h-8 bg-red-100 rounded flex items-center justify-center">
+                        <CreditCard className="w-4 h-4 text-red-600" />
                       </div>
                       <div>
                         <p className="font-medium text-gray-900">
@@ -1048,7 +1048,7 @@ const PlaceOrder = () => {
               <button
                 type="submit"
                 disabled={loading || !selectedAddress}
-                className="w-full mt-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 lg:py-4 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
+                className="w-full mt-6 bg-gradient-to-r from-red-600 to-orange-600 text-white py-3 lg:py-4 px-6 rounded-lg font-semibold hover:from-red-700 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
               >
                 {loading ? (
                   <>
@@ -1072,7 +1072,7 @@ const PlaceOrder = () => {
       </form>
 
       {/* Address Modal */}
-      <AddressModal 
+      <AddressModal
         isOpen={showAddressModal}
         onClose={() => {
           setShowAddressModal(false);

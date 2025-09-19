@@ -17,21 +17,21 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Phone Support",
-      info: "+91 98765 43210",
+      info: "+91 92051 63669",
       description: "Call us for immediate assistance",
       availability: "Mon-Sat, 9 AM - 8 PM IST",
     },
     {
       icon: Mail,
       title: "Email Support",
-      info: "support@gearmates.com",
+      info: "gearmates.info@gmail.com",
       description: "Send us your queries anytime",
       availability: "Response within 24 hours",
     },
     {
       icon: MessageCircle,
       title: "WhatsApp Chat",
-      info: "+91 98765 43210",
+      info: "+91 92051 63669",
       description: "Quick chat support available",
       availability: "Mon-Sat, 9 AM - 8 PM IST",
     },
@@ -57,15 +57,14 @@ const Contact = () => {
   ];
 
   const businessHours = [
-    { day: "Monday - Friday", hours: "9:00 AM - 8:00 PM" },
-    { day: "Saturday", hours: "10:00 AM - 6:00 PM" },
+    { day: "Monday - Saturday", hours: "9:00 AM - 8:00 PM" },
     { day: "Sunday", hours: "Closed" },
   ];
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-gray-50 to-blue-50 pt-16 pb-12">
+      <div className="bg-gradient-to-br from-gray-50 to-red-50 pt-16 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Title
             text1="GET IN"
@@ -86,12 +85,12 @@ const Contact = () => {
               src={assets.contact_img}
               alt="GearMates Tech Store"
             />
-            <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-2xl shadow-lg">
+            <div className="absolute -bottom-6 -right-6 bg-red-600 text-white p-6 rounded-2xl shadow-lg">
               <div className="flex items-center space-x-2">
                 <MapPin className="h-5 w-5" />
                 <div>
                   <p className="font-bold">Visit Our Store</p>
-                  <p className="text-sm text-blue-100">Punjab, India</p>
+                  <p className="text-sm text-red-100">Punjab, India</p>
                 </div>
               </div>
             </div>
@@ -117,16 +116,16 @@ const Contact = () => {
                 return (
                   <div
                     key={index}
-                    className="flex items-start space-x-4 p-4 rounded-xl bg-gray-50 hover:bg-blue-50 transition-colors"
+                    className="flex items-start space-x-4 p-4 rounded-xl bg-gray-50 hover:bg-red-50 transition-colors"
                   >
-                    <div className="bg-blue-100 p-3 rounded-lg">
-                      <IconComponent className="h-6 w-6 text-blue-600" />
+                    <div className="bg-red-100 p-3 rounded-lg">
+                      <IconComponent className="h-6 w-6 text-red-600" />
                     </div>
                     <div className="flex-1">
                       <h4 className="font-semibold text-gray-900 mb-1">
                         {method.title}
                       </h4>
-                      <p className="text-blue-600 font-medium mb-1">
+                      <p className="text-red-600 font-medium mb-1">
                         {method.info}
                       </p>
                       <p className="text-gray-600 text-sm mb-1">
@@ -142,9 +141,9 @@ const Contact = () => {
             </div>
 
             {/* Store Address */}
-            <div className="bg-gradient-to-r from-gray-100 to-blue-100 p-6 rounded-xl">
+            <div className="bg-gradient-to-r from-gray-100 to-red-100 p-6 rounded-xl">
               <div className="flex items-start space-x-3">
-                <MapPin className="h-6 w-6 text-blue-600 mt-1" />
+                <MapPin className="h-6 w-6 text-red-600 mt-1" />
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">
                     Our Location
@@ -184,10 +183,10 @@ const Contact = () => {
               return (
                 <div
                   key={index}
-                  className="text-center p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300 hover:border-blue-200"
+                  className="text-center p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300 hover:border-red-200"
                 >
-                  <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <IconComponent className="h-8 w-8 text-blue-600" />
+                  <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <IconComponent className="h-8 w-8 text-red-600" />
                   </div>
                   <h4 className="text-xl font-bold text-gray-900 mb-4">
                     {service.title}
@@ -217,7 +216,7 @@ const Contact = () => {
                     className="flex justify-between items-center"
                   >
                     <span className="text-gray-300">{schedule.day}</span>
-                    <span className="text-blue-400 font-medium">
+                    <span className="text-red-400 font-medium">
                       {schedule.hours}
                     </span>
                   </div>
@@ -226,14 +225,14 @@ const Contact = () => {
             </div>
 
             <div className="text-center">
-              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-6">
+              <div className="bg-gradient-to-r from-red-600 to-orange-600 rounded-xl p-6">
                 <Clock className="h-12 w-12 text-white mx-auto mb-4" />
                 <h4 className="text-xl font-bold mb-2">Need Urgent Help?</h4>
-                <p className="text-blue-100 mb-4">
+                <p className="text-red-100 mb-4">
                   For immediate assistance outside business hours, send us a
                   WhatsApp message.
                 </p>
-                <p className="text-white font-medium">+91 98765 43210</p>
+                <p className="text-white font-medium">+91 92051 63669</p>
               </div>
             </div>
           </div>

@@ -24,7 +24,7 @@ const Hero = () => {
         "Upgrade your devices with cutting-edge accessories designed for modern lifestyles",
       image: assets.hero1,
       cta: "Shop Now",
-      gradient: "from-blue-900 via-blue-800 to-indigo-900",
+      gradient: "from-red-900 via-red-800 to-orange-900",
       features: ["Fast Charging", "Premium Quality", "1 Year Warranty"],
     },
     {
@@ -34,7 +34,7 @@ const Hero = () => {
         "Experience crystal-clear sound with our premium wireless earbuds and speakers",
       image: assets.hero2,
       cta: "Explore Audio",
-      gradient: "from-purple-900 via-purple-800 to-pink-900",
+      gradient: "from-orange-900 via-orange-800 to-orange-900",
       features: ["Noise Cancellation", "30Hr Battery", "Premium Drivers"],
     },
     {
@@ -156,7 +156,7 @@ const Hero = () => {
                     <span className="font-medium">Secure Payment</span>
                   </div>
                   <div className="flex items-center space-x-2 text-sm">
-                    <Truck className="h-5 w-5 text-blue-400" />
+                    <Truck className="h-5 w-5 text-red-400" />
                     <span className="font-medium">Free Shipping</span>
                   </div>
                 </div>
