@@ -99,7 +99,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         <div className="p-4 border-t border-gray-200">
           <div className="text-xs text-gray-500 text-center">
             <div>© 2025 GearMates</div>
-            <div className="mt-1">Version 2.0</div>
           </div>
         </div>
       </div>

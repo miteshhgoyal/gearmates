@@ -73,8 +73,6 @@ const App = () => {
               <div className="flex flex-col sm:flex-row items-center justify-between text-xs sm:text-sm text-gray-600 space-y-2 sm:space-y-0">
                 <div className="flex items-center space-x-2 sm:space-x-4">
                   <span>© 2025 GearMates Admin</span>
-                  <span className="hidden sm:inline">•</span>
-                  <span className="hidden sm:inline">Version 2.0</span>
                 </div>
                 <div className="flex items-center space-x-4">
                   <span>
