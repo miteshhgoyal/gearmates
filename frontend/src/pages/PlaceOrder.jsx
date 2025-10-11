@@ -416,7 +416,10 @@ const PlaceOrder = () => {
   // Fetch user profile and addresses
   useEffect(() => {
     const fetchUserData = async () => {
-      if (!token) return;
+      if (!token) {
+        navigate("/login");
+        return;
+      }
 
       setProfileLoading(true);
       try {

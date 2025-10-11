@@ -279,10 +279,6 @@ const Product = () => {
                 >
                   Add to Cart
                 </button>
-
-                <button className="w-full border border-gray-300 text-gray-700 py-2.5 px-4 rounded font-medium hover:bg-gray-50 transition-colors">
-                  Buy Now
-                </button>
               </div>
 
               {/* Simple Trust Badges */}
