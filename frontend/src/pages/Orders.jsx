@@ -23,6 +23,8 @@ import {
   MessageCircle,
   HelpCircle,
   RefreshCw,
+  X,
+  ExternalLink,
 } from "lucide-react";
 
 const Orders = () => {
@@ -33,6 +35,10 @@ const Orders = () => {
   const [expandedOrders, setExpandedOrders] = useState(new Set());
   const [activeFilter, setActiveFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+
+  // Shiprocket tracking states
+  const [trackingModal, setTrackingModal] = useState(null);
+  const [trackingLoading, setTrackingLoading] = useState(false);
 
   // Filter options for mobile tabs
   const filterOptions = [
@@ -67,6 +73,12 @@ const Orders = () => {
             item["orderId"] = order._id;
             item["amount"] = order.amount;
             item["address"] = order.address;
+            // Add tracking info
+            item["awbCode"] = order.awbCode;
+            item["courierName"] = order.courierName;
+            item["trackingUrl"] = order.trackingUrl;
+            item["shiprocketOrderId"] = order.shiprocketOrderId;
+            item["shiprocketShipmentId"] = order.shiprocketShipmentId;
             allOrdersItem.push(item);
           });
         });
@@ -77,6 +89,37 @@ const Orders = () => {
       console.log(error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Track shipment
+  const trackShipment = async (orderId) => {
+    setTrackingLoading(true);
+    try {
+      const response = await axios.post(
+        backendUrl + "/api/order/track",
+        { orderId },
+        { headers: { token } }
+      );
+
+      if (response.data.success) {
+        setTrackingModal({
+          orderId,
+          tracking: response.data.tracking,
+          awbCode: response.data.awbCode,
+          courierName: response.data.courierName,
+          trackingUrl: response.data.trackingUrl,
+          shiprocketOrderId: response.data.shiprocketOrderId,
+          shiprocketShipmentId: response.data.shiprocketShipmentId,
+        });
+      } else {
+        alert(response.data.message || "Tracking info not available");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to fetch tracking information");
+    } finally {
+      setTrackingLoading(false);
     }
   };
 
@@ -208,6 +251,122 @@ const Orders = () => {
       month: "short",
       day: "numeric",
     })}`;
+  };
+
+  // Tracking Modal Component
+  const TrackingModal = ({ data, onClose }) => {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
+        <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-gray-900">
+              Track Order #{data.orderId.slice(-8).toUpperCase()}
+            </h3>
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-gray-100 rounded-full"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="p-6 space-y-6">
+            {/* Tracking Information */}
+            {data.awbCode && (
+              <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+                <h4 className="font-semibold text-orange-900 mb-3">
+                  Shipping Details
+                </h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">AWB Code:</span>
+                    <span className="font-mono font-semibold">
+                      {data.awbCode}
+                    </span>
+                  </div>
+                  {data.courierName && (
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Courier:</span>
+                      <span className="font-semibold">{data.courierName}</span>
+                    </div>
+                  )}
+                  {data.trackingUrl && (
+                    <div className="mt-3">
+                      <a
+                        href={data.trackingUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center space-x-2 bg-orange-600 text-white py-2 px-4 rounded-lg hover:bg-orange-700 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        <span>Track on Courier Website</span>
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Tracking Timeline */}
+            {data.tracking && data.tracking.tracking_data && (
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-4">
+                  Shipment Timeline
+                </h4>
+                <div className="space-y-4">
+                  {data.tracking.tracking_data.shipment_track.map(
+                    (track, index) => (
+                      <div key={index} className="flex items-start space-x-3">
+                        <div className="flex-shrink-0">
+                          <div
+                            className={`w-3 h-3 rounded-full mt-1 ${
+                              index === 0 ? "bg-orange-600" : "bg-gray-300"
+                            }`}
+                          ></div>
+                        </div>
+                        <div
+                          className={`flex-1 pb-4 ${
+                            index !==
+                            data.tracking.tracking_data.shipment_track.length -
+                              1
+                              ? "border-l-2 border-gray-200"
+                              : ""
+                          } pl-4 -ml-1.5`}
+                        >
+                          <p className="font-medium text-gray-900">
+                            {track.status}
+                          </p>
+                          <p className="text-sm text-gray-600">{track.date}</p>
+                          {track.location && (
+                            <p className="text-sm text-gray-500 mt-1">
+                              {track.location}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* No Tracking Available */}
+            {!data.awbCode && !data.tracking && (
+              <div className="text-center py-8">
+                <Package className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  Tracking Not Available Yet
+                </h3>
+                <p className="text-gray-600">
+                  Your order is being processed. Tracking information will be
+                  available soon.
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
   };
 
   if (loading) {
@@ -437,6 +596,42 @@ const Orders = () => {
                     )}
 
                     {/* Action Buttons */}
+                    <div className="space-y-2 mb-3">
+                      <button
+                        onClick={() => trackShipment(item.orderId)}
+                        disabled={trackingLoading}
+                        className="w-full flex items-center justify-center space-x-2 bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors disabled:opacity-50"
+                      >
+                        {trackingLoading ? (
+                          <>
+                            <RefreshCw className="w-4 h-4 animate-spin" />
+                            <span>Loading...</span>
+                          </>
+                        ) : (
+                          <>
+                            <RotateCcw className="w-4 h-4" />
+                            <span>Track Order</span>
+                          </>
+                        )}
+                      </button>
+
+                      {/* Show tracking info if available */}
+                      {item.awbCode && (
+                        <div className="text-xs text-gray-600 bg-orange-50 p-2 rounded">
+                          <p>
+                            <span className="font-medium">AWB:</span>{" "}
+                            {item.awbCode}
+                          </p>
+                          {item.courierName && (
+                            <p>
+                              <span className="font-medium">Courier:</span>{" "}
+                              {item.courierName}
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
                     <div className="flex items-center justify-between">
                       <div className="text-sm">
                         <span className="text-gray-600">Delivery: </span>
@@ -643,13 +838,42 @@ const Orders = () => {
                             )}
                           </div>
                         </div>
+
+                        {/* Show tracking info if available */}
+                        {item.awbCode && (
+                          <div className="mt-3 text-xs text-gray-600 bg-orange-50 p-3 rounded">
+                            <p className="mb-1">
+                              <span className="font-medium">AWB:</span>{" "}
+                              {item.awbCode}
+                            </p>
+                            {item.courierName && (
+                              <p>
+                                <span className="font-medium">Courier:</span>{" "}
+                                {item.courierName}
+                              </p>
+                            )}
+                          </div>
+                        )}
                       </div>
 
                       {/* Action Buttons */}
                       <div className="space-y-2">
-                        <button className="w-full flex items-center justify-center space-x-2 bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
-                          <RotateCcw className="w-4 h-4" />
-                          <span>Track Order</span>
+                        <button
+                          onClick={() => trackShipment(item.orderId)}
+                          disabled={trackingLoading}
+                          className="w-full flex items-center justify-center space-x-2 bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors disabled:opacity-50"
+                        >
+                          {trackingLoading ? (
+                            <>
+                              <RefreshCw className="w-4 h-4 animate-spin" />
+                              <span>Loading...</span>
+                            </>
+                          ) : (
+                            <>
+                              <RotateCcw className="w-4 h-4" />
+                              <span>Track Order</span>
+                            </>
+                          )}
                         </button>
                       </div>
                     </div>
@@ -727,6 +951,14 @@ const Orders = () => {
           </div>
         </div>
       </div>
+
+      {/* Tracking Modal */}
+      {trackingModal && (
+        <TrackingModal
+          data={trackingModal}
+          onClose={() => setTrackingModal(null)}
+        />
+      )}
     </div>
   );
 };

@@ -8,8 +8,16 @@ const orderSchema = new mongoose.Schema({
     status: { type: String, required: true, default: 'Order Placed' },
     paymentMethod: { type: String, required: true },
     payment: { type: Boolean, required: true, default: false },
-    date: { type: Number, required: true }
+    date: { type: Number, required: true },
+
+    // Shiprocket tracking fields
+    shiprocketOrderId: { type: Number },
+    shiprocketShipmentId: { type: Number },
+    awbCode: { type: String },
+    courierName: { type: String },
+    trackingUrl: { type: String }
 }, { timestamps: true });
 
 const orderModel = mongoose.models.order || mongoose.model('order', orderSchema);
+
 export default orderModel;

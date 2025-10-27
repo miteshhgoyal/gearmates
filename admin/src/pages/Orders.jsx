@@ -25,6 +25,7 @@ import {
   X,
   MoreVertical,
   Edit,
+  RefreshCw, // Added for tracking refresh
 } from "lucide-react";
 
 const Orders = ({ token }) => {
@@ -37,6 +38,11 @@ const Orders = ({ token }) => {
   const [expandedOrders, setExpandedOrders] = useState(new Set());
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
+
+  // Shiprocket tracking states
+  const [trackingModal, setTrackingModal] = useState(null);
+  const [trackingData, setTrackingData] = useState(null);
+  const [loadingTracking, setLoadingTracking] = useState(false);
 
   const statusOptions = [
     "Order Placed",
@@ -103,6 +109,60 @@ const Orders = ({ token }) => {
     } catch (error) {
       console.log(error);
       toast.error("Failed to update status");
+    }
+  };
+
+  // Update tracking info manually
+  const updateTrackingInfo = async (orderId, trackingInfo) => {
+    try {
+      const response = await axios.post(
+        backendUrl + "/api/order/update-tracking",
+        {
+          orderId,
+          awbCode: trackingInfo.awbCode,
+          courierName: trackingInfo.courierName,
+          trackingUrl: trackingInfo.trackingUrl,
+          shiprocketOrderId: trackingInfo.shiprocketOrderId,
+          shiprocketShipmentId: trackingInfo.shiprocketShipmentId,
+        },
+        { headers: { token } }
+      );
+
+      if (response.data.success) {
+        toast.success("Tracking info updated successfully");
+        fetchAllOrders();
+        setTrackingModal(null);
+        setTrackingData(null);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to update tracking info");
+    }
+  };
+
+  // Fetch tracking details from Shiprocket
+  const fetchTrackingDetails = async (orderId) => {
+    setLoadingTracking(true);
+    try {
+      const response = await axios.post(
+        backendUrl + "/api/order/track",
+        { orderId },
+        { headers: { token } }
+      );
+
+      if (response.data.success) {
+        setTrackingData(response.data.tracking);
+        toast.success("Tracking data fetched");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to fetch tracking details");
+    } finally {
+      setLoadingTracking(false);
     }
   };
 
@@ -189,6 +249,222 @@ const Orders = ({ token }) => {
   useEffect(() => {
     fetchAllOrders();
   }, [token]);
+
+  // Tracking Modal Component
+  const TrackingModal = ({ order, onClose }) => {
+    const [formData, setFormData] = useState({
+      awbCode: order.awbCode || "",
+      courierName: order.courierName || "",
+      trackingUrl: order.trackingUrl || "",
+      shiprocketOrderId: order.shiprocketOrderId || "",
+      shiprocketShipmentId: order.shiprocketShipmentId || "",
+    });
+
+    const handleSubmit = () => {
+      updateTrackingInfo(order._id, formData);
+    };
+
+    const handleFetchTracking = () => {
+      fetchTrackingDetails(order._id);
+    };
+
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
+        <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-gray-900">
+              Manage Tracking - Order #{order._id.slice(-8).toUpperCase()}
+            </h3>
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-gray-100 rounded-full"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="p-6 space-y-6">
+            {/* Fetch from Shiprocket Button */}
+            <div className="flex items-center justify-between p-4 bg-orange-50 rounded-lg">
+              <div>
+                <p className="font-medium text-gray-900">
+                  Fetch from Shiprocket
+                </p>
+                <p className="text-sm text-gray-600">
+                  Get latest tracking info automatically
+                </p>
+              </div>
+              <button
+                onClick={handleFetchTracking}
+                disabled={loadingTracking}
+                className="flex items-center space-x-2 bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 disabled:opacity-50"
+              >
+                <RefreshCw
+                  className={`w-4 h-4 ${loadingTracking ? "animate-spin" : ""}`}
+                />
+                <span>{loadingTracking ? "Fetching..." : "Fetch"}</span>
+              </button>
+            </div>
+
+            {/* Tracking Data Display */}
+            {trackingData && (
+              <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                <h4 className="font-semibold text-green-900 mb-3">
+                  Tracking Information
+                </h4>
+                <div className="space-y-2 text-sm">
+                  <pre className="bg-white p-3 rounded border border-green-200 overflow-x-auto">
+                    {JSON.stringify(trackingData, null, 2)}
+                  </pre>
+                </div>
+              </div>
+            )}
+
+            {/* Manual Entry Form */}
+            <div className="space-y-4">
+              <h4 className="font-semibold text-gray-900">
+                Manual Tracking Entry
+              </h4>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  AWB Code
+                </label>
+                <input
+                  type="text"
+                  value={formData.awbCode}
+                  onChange={(e) =>
+                    setFormData({ ...formData, awbCode: e.target.value })
+                  }
+                  placeholder="Enter AWB tracking number"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Courier Name
+                </label>
+                <input
+                  type="text"
+                  value={formData.courierName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, courierName: e.target.value })
+                  }
+                  placeholder="e.g., BlueDart, DTDC"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Tracking URL
+                </label>
+                <input
+                  type="url"
+                  value={formData.trackingUrl}
+                  onChange={(e) =>
+                    setFormData({ ...formData, trackingUrl: e.target.value })
+                  }
+                  placeholder="https://tracking-url.com"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Shiprocket Order ID
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.shiprocketOrderId}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        shiprocketOrderId: e.target.value,
+                      })
+                    }
+                    placeholder="12345678"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Shipment ID
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.shiprocketShipmentId}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        shiprocketShipmentId: e.target.value,
+                      })
+                    }
+                    placeholder="87654321"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Current Values Display */}
+            {(order.awbCode || order.courierName) && (
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <h4 className="font-semibold text-gray-900 mb-3">
+                  Current Tracking Info
+                </h4>
+                <div className="space-y-2 text-sm">
+                  {order.awbCode && (
+                    <p>
+                      <span className="font-medium">AWB:</span> {order.awbCode}
+                    </p>
+                  )}
+                  {order.courierName && (
+                    <p>
+                      <span className="font-medium">Courier:</span>{" "}
+                      {order.courierName}
+                    </p>
+                  )}
+                  {order.trackingUrl && (
+                    <p>
+                      <span className="font-medium">URL:</span>{" "}
+                      <a
+                        href={order.trackingUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-orange-600 hover:underline"
+                      >
+                        {order.trackingUrl}
+                      </a>
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Action Buttons */}
+            <div className="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200">
+              <button
+                onClick={onClose}
+                className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSubmit}
+                className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700"
+              >
+                Update Tracking Info
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   // Mobile Filter Modal
   const MobileFilterModal = () => {
@@ -859,6 +1135,46 @@ const Orders = ({ token }) => {
                             ))}
                           </select>
                         </div>
+
+                        {/* Manage Tracking Button */}
+                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                          <button
+                            onClick={() => setTrackingModal(order)}
+                            className="w-full flex items-center justify-center space-x-2 bg-orange-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-orange-700 transition-colors"
+                          >
+                            <Package className="w-4 h-4" />
+                            <span>Manage Tracking</span>
+                          </button>
+
+                          {/* Show tracking info if available */}
+                          {(order.awbCode || order.courierName) && (
+                            <div className="mt-3 pt-3 border-t border-gray-200 text-xs space-y-1">
+                              {order.awbCode && (
+                                <p className="text-gray-600">
+                                  <span className="font-medium">AWB:</span>{" "}
+                                  {order.awbCode}
+                                </p>
+                              )}
+                              {order.courierName && (
+                                <p className="text-gray-600">
+                                  <span className="font-medium">Courier:</span>{" "}
+                                  {order.courierName}
+                                </p>
+                              )}
+                              {order.trackingUrl && (
+                                <a
+                                  href={order.trackingUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-orange-600 hover:underline flex items-center space-x-1"
+                                >
+                                  <span>Track</span>
+                                  <ExternalLink className="w-3 h-3" />
+                                </a>
+                              )}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -871,6 +1187,17 @@ const Orders = ({ token }) => {
 
       {/* Mobile Filter Modal */}
       <MobileFilterModal />
+
+      {/* Tracking Modal */}
+      {trackingModal && (
+        <TrackingModal
+          order={trackingModal}
+          onClose={() => {
+            setTrackingModal(null);
+            setTrackingData(null);
+          }}
+        />
+      )}
     </div>
   );
 };
