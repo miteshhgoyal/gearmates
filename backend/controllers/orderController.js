@@ -230,6 +230,18 @@ const updateTrackingInfo = async (req, res) => {
     }
 };
 
+const updatePaymentStatus = async (req, res) => {
+    try {
+        const { orderId, payment } = req.body;
+
+        await orderModel.findByIdAndUpdate(orderId, { payment });
+        res.json({ success: true, message: 'Payment status updated' });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
 export {
     verifyRazorpay,
     placeOrder,
@@ -238,5 +250,6 @@ export {
     userOrders,
     updateStatus,
     trackOrder,
-    updateTrackingInfo
+    updateTrackingInfo,
+    updatePaymentStatus 
 };

@@ -92,6 +92,26 @@ const Orders = ({ token }) => {
     }
   };
 
+  const paymentStatusHandler = async (orderId, paymentStatus) => {
+    try {
+      const response = await axios.post(
+        backendUrl + "/api/order/payment-status",
+        { orderId, payment: paymentStatus },
+        { headers: { token } }
+      );
+
+      if (response.data.success) {
+        toast.success("Payment status updated");
+        fetchAllOrders();
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to update payment status");
+    }
+  };
+
   const statusHandler = async (event, orderId) => {
     try {
       const response = await axios.post(
@@ -1133,6 +1153,26 @@ const Orders = ({ token }) => {
                                 {status}
                               </option>
                             ))}
+                          </select>
+                        </div>
+
+                        {/* Payment Status Update */}
+                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                          <label className="block text-sm font-semibold text-gray-900 mb-3">
+                            Update Payment Status
+                          </label>
+                          <select
+                            onChange={(event) =>
+                              paymentStatusHandler(
+                                order._id,
+                                event.target.value === "true"
+                              )
+                            }
+                            value={order.payment.toString()}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
+                          >
+                            <option value="false">Unpaid</option>
+                            <option value="true">Paid</option>
                           </select>
                         </div>
 
