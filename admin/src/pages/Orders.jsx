@@ -673,12 +673,6 @@ const Orders = ({ token }) => {
                   Track and manage customer orders
                 </p>
               </div>
-              <div className="flex items-center space-x-2">
-                <button className="flex items-center space-x-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
-                  <Download className="w-4 h-4" />
-                  <span>Export</span>
-                </button>
-              </div>
             </div>
           </div>
 
