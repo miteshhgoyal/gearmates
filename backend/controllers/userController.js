@@ -222,19 +222,37 @@ const registerUser = async (req, res) => {
 
 const adminLogin = async (req, res) => {
     try {
-        const { email, password } = req.body
+        const { email, password } = req.body;
 
-        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
-            const token = jwt.sign(email + password, process.env.JWT_SECRET);
-            res.json({ success: true, token })
+        // Check if credentials match admin email
+        if (email !== process.env.ADMIN_EMAIL) {
+            return res.json({ success: false, message: "Invalid credentials" });
+        }
+
+        // Find admin user in database
+        const adminUser = await userModel.findOne({ email: process.env.ADMIN_EMAIL });
+
+        if (!adminUser) {
+            return res.json({ success: false, message: "Admin user not found" });
+        }
+
+        // Compare password with hashed password in database
+        const isMatch = await bcrypt.compare(password, adminUser.password);
+
+        if (isMatch) {
+            const token = jwt.sign(
+                { id: adminUser._id, isAdmin: true },
+                process.env.JWT_SECRET
+            );
+            res.json({ success: true, token });
         } else {
-            res.json({ success: false, message: "Invalid credentials" })
+            res.json({ success: false, message: "Invalid credentials" });
         }
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: error.message });
     }
-}
+};
 
 export {
     loginUser,
