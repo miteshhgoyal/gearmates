@@ -874,7 +874,7 @@ const Collection = () => {
                 )}
 
                 {/* Brands */}
-                {brandOptions.length > 0 && (
+                {/* {brandOptions.length > 0 && (
                   <div className="p-6 border-b border-gray-200">
                     <h4 className="text-sm font-semibold text-gray-900 mb-4">
                       Brands
@@ -897,7 +897,7 @@ const Collection = () => {
                       ))}
                     </div>
                   </div>
-                )}
+                )} */}
 
                 {/* Price Range */}
                 <div className="p-6">
