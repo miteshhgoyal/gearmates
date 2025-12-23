@@ -736,7 +736,7 @@ const Collection = () => {
               </div>
 
               {/* Brands */}
-              {brandOptions.length > 0 && (
+              {/* {brandOptions.length > 0 && (
                 <div className="p-4">
                   <h4 className="text-base font-semibold text-gray-900 mb-4">
                     Brands
@@ -759,7 +759,7 @@ const Collection = () => {
                     ))}
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
 
             {/* Modal Footer */}
