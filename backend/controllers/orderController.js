@@ -1,80 +1,187 @@
-import orderModel from "../models/orderModel.js";
-import userModel from "../models/userModel.js";
+// controllers/orderController.js
+import orderModel from '../models/orderModel.js';
+import userModel from '../models/userModel.js';
 import razorpay from 'razorpay';
 import shiprocketService from '../service/shiprocketService.js';
 
 const currency = 'inr';
 
 const razorpayInstance = new razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
+    key_id: process.env.RAZORPAYKEYID,
+    key_secret: process.env.RAZORPAYKEYSECRET,
 });
 
-// Helper function
-const createShiprocketOrder = async (order) => {
+// ========== INTERNAL HELPER: FULL SHIPROCKET FLOW ==========
+
+const processShiprocketOrder = async (order) => {
     try {
-        const shiprocketResponse = await shiprocketService.createOrder({
-            orderId: order._id.toString(),
+        // 1) Create order in Shiprocket
+        const srOrder = await shiprocketService.createOrder({
+            orderId: order.id.toString(),
             items: order.items,
             address: order.address,
             amount: order.amount,
             date: order.date,
-            paymentMethod: order.paymentMethod
+            paymentMethod: order.paymentMethod,
+            dimensions: order.dimensions,
         });
 
-        if (shiprocketResponse.order_id) {
-            order.shiprocketOrderId = shiprocketResponse.order_id;
-            order.shiprocketShipmentId = shiprocketResponse.shipment_id;
-            await order.save();
+        order.shiprocketOrderId = srOrder.orderId;
+        order.shiprocketShipmentId = srOrder.shipmentId;
+        order.shiprocketStatus = 'created';
+        await order.save();
+
+        // 2) Check serviceability
+        const totalWeight = order.items.reduce(
+            (sum, item) => sum + ((item.weight || 0.5) * (item.quantity || 1)),
+            0
+        );
+
+        const pickupPincode =
+            process.env.SHIPROCKET_WAREHOUSE_PINCODE || '110001';
+
+        const courierOptions = await shiprocketService.checkServiceability(
+            pickupPincode,
+            order.address.zipcode,
+            totalWeight || 0.5,
+            order.paymentMethod === 'COD',
+            order.amount
+        );
+
+        if (!courierOptions.length) {
+            throw new Error('No courier service available for this address');
         }
 
-        return shiprocketResponse;
-    } catch (error) {
-        console.error('Shiprocket integration failed:', error);
-        return null;
+        const selectedCourier = courierOptions[0]; // simplest: first / cheapest
+
+        // 3) Assign AWB
+        const awbData = await shiprocketService.assignAWB(
+            order.shiprocketShipmentId,
+            selectedCourier.courier_company_id
+        );
+
+        order.awbCode = awbData.awbCode;
+        order.courierId = awbData.courierId;
+        order.courierName = awbData.courierName;
+        order.shiprocketStatus = 'awb_assigned';
+        await order.save();
+
+        // Optionally set a generic tracking URL if needed
+        order.trackingUrl =
+            order.trackingUrl ||
+            `https://shiprocket.co/tracking/${encodeURIComponent(order.awbCode)}`;
+
+        // 4) Generate label
+        const labelUrl = await shiprocketService.generateLabel(
+            order.shiprocketShipmentId
+        );
+        order.labelUrl = labelUrl;
+        order.shiprocketStatus = 'label_generated';
+        await order.save();
+
+        // 5) Schedule pickup (tomorrow)
+        const pickupRes = await shiprocketService.requestPickup(
+            order.shiprocketShipmentId
+        );
+        order.pickupScheduled = true;
+        order.pickupDate = new Date(pickupRes.pickupDate);
+        order.pickupStatus = pickupRes.pickupStatus;
+        order.shiprocketStatus = 'pickup_scheduled';
+        order.status = 'Shipped';
+        await order.save();
+
+        return {
+            awbCode: order.awbCode,
+            courierName: order.courierName,
+            labelUrl: order.labelUrl,
+            trackingUrl: order.trackingUrl,
+        };
+    } catch (err) {
+        console.error('Shiprocket full-flow error:', err.message);
+        order.shiprocketStatus = 'error';
+        order.shiprocketError = err.message;
+        await order.save();
+        // Do not throw further in placeOrder; it would still keep base order
+        throw err;
     }
 };
+
+// ========== ORDER PLACEMENT (COD) ==========
 
 const placeOrder = async (req, res) => {
     try {
         const { userId, items, amount, address } = req.body;
 
+        const totalWeight = items.reduce(
+            (sum, item) => sum + ((item.weight || 0.5) * (item.quantity || 1)),
+            0
+        );
+
         const orderData = {
             userId,
             items,
             address,
             amount,
-            paymentMethod: "COD",
+            paymentMethod: 'COD',
             payment: false,
-            date: Date.now()
+            date: Date.now(),
+            dimensions: {
+                length: 10,
+                breadth: 10,
+                height: 10,
+                weight: totalWeight || 0.5,
+            },
         };
 
         const newOrder = new orderModel(orderData);
         await newOrder.save();
 
-        await createShiprocketOrder(newOrder);
+        // run Shiprocket integration in same request; you can move to background if needed
+        try {
+            await processShiprocketOrder(newOrder);
+        } catch {
+            // keep order; Shiprocket failure info stored in shiprocketError
+        }
 
         await userModel.findByIdAndUpdate(userId, { cartData: {} });
-        res.json({ success: true, message: "Order Placed" });
 
-    } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message });
+        res.json({
+            success: true,
+            message: 'Order Placed',
+            orderId: newOrder.id,
+            awbCode: newOrder.awbCode || null,
+        });
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
     }
 };
+
+// ========== ORDER PLACEMENT (RAZORPAY) ==========
 
 const placeOrderRazorpay = async (req, res) => {
     try {
         const { userId, items, amount, address } = req.body;
+
+        const totalWeight = items.reduce(
+            (sum, item) => sum + ((item.weight || 0.5) * (item.quantity || 1)),
+            0
+        );
 
         const orderData = {
             userId,
             items,
             address,
             amount,
-            paymentMethod: "Razorpay",
+            paymentMethod: 'Razorpay',
             payment: false,
-            date: Date.now()
+            date: Date.now(),
+            dimensions: {
+                length: 10,
+                breadth: 10,
+                height: 10,
+                weight: totalWeight || 0.5,
+            },
         };
 
         const newOrder = new orderModel(orderData);
@@ -83,28 +190,25 @@ const placeOrderRazorpay = async (req, res) => {
         const options = {
             amount: amount * 100,
             currency: currency.toUpperCase(),
-            receipt: newOrder._id.toString()
+            receipt: newOrder.id.toString(),
         };
 
-        await razorpayInstance.orders.create(options, (error, order) => {
-            if (error) {
-                console.log(error);
-                return res.json({ success: false, message: error });
-            }
-            res.json({ success: true, order });
-        });
+        const order = await razorpayInstance.orders.create(options);
 
-    } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message });
+        res.json({ success: true, order });
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
     }
 };
 
+// ========== VERIFY RAZORPAY PAYMENT ==========
+
 const verifyRazorpay = async (req, res) => {
     try {
-        const { userId, razorpay_order_id } = req.body;
+        const { userId, razorpayorderid } = req.body;
 
-        const orderInfo = await razorpayInstance.orders.fetch(razorpay_order_id);
+        const orderInfo = await razorpayInstance.orders.fetch(razorpayorderid);
 
         if (orderInfo.status === 'paid') {
             const order = await orderModel.findByIdAndUpdate(
@@ -114,26 +218,32 @@ const verifyRazorpay = async (req, res) => {
             );
 
             await userModel.findByIdAndUpdate(userId, { cartData: {} });
-            await createShiprocketOrder(order);
 
-            res.json({ success: true, message: "Payment Successful" });
+            try {
+                await processShiprocketOrder(order);
+            } catch {
+                // error stored in shiprocket fields
+            }
+
+            res.json({ success: true, message: 'Payment Successful' });
         } else {
             res.json({ success: false, message: 'Payment Failed' });
         }
-
-    } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message });
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
     }
 };
 
-const allOrders = async (req, res) => {
+// ========== LISTING ==========
+
+const allOrders = async (_req, res) => {
     try {
-        const orders = await orderModel.find({});
+        const orders = await orderModel.find();
         res.json({ success: true, orders });
-    } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message });
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
     }
 };
 
@@ -142,27 +252,41 @@ const userOrders = async (req, res) => {
         const { userId } = req.body;
         const orders = await orderModel.find({ userId });
         res.json({ success: true, orders });
-    } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message });
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
     }
 };
+
+// ========== STATUS UPDATES ==========
 
 const updateStatus = async (req, res) => {
     try {
         const { orderId, status } = req.body;
         await orderModel.findByIdAndUpdate(orderId, { status });
         res.json({ success: true, message: 'Status Updated' });
-    } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message });
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
     }
 };
+
+const updatePaymentStatus = async (req, res) => {
+    try {
+        const { orderId, payment } = req.body;
+        await orderModel.findByIdAndUpdate(orderId, { payment });
+        res.json({ success: true, message: 'Payment status updated' });
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
+    }
+};
+
+// ========== TRACKING ==========
 
 const trackOrder = async (req, res) => {
     try {
         const { orderId } = req.body;
-
         const order = await orderModel.findById(orderId);
 
         if (!order) {
@@ -172,47 +296,48 @@ const trackOrder = async (req, res) => {
         if (!order.shiprocketOrderId && !order.awbCode) {
             return res.json({
                 success: false,
-                message: 'Tracking not available yet. Order is being processed.'
+                message: 'Tracking not available yet. Order is being processed.',
             });
         }
 
-        let trackingData = null;
+        let tracking = null;
 
-        if (order.shiprocketOrderId) {
-            try {
-                trackingData = await shiprocketService.trackShipment(order.shiprocketOrderId);
-            } catch (error) {
-                console.error('Tracking by order ID failed:', error);
-            }
+        if (order.shiprocketShipmentId) {
+            tracking = await shiprocketService.trackShipment(order.shiprocketShipmentId);
         }
 
-        if (!trackingData && order.awbCode) {
-            try {
-                trackingData = await shiprocketService.trackByAWB(order.awbCode);
-            } catch (error) {
-                console.error('Tracking by AWB failed:', error);
-            }
+        if (!tracking && order.awbCode) {
+            tracking = await shiprocketService.trackByAWB(order.awbCode);
         }
 
         res.json({
             success: true,
-            tracking: trackingData,
+            tracking,
             awbCode: order.awbCode,
             courierName: order.courierName,
             trackingUrl: order.trackingUrl,
             shiprocketOrderId: order.shiprocketOrderId,
-            shiprocketShipmentId: order.shiprocketShipmentId
+            shiprocketShipmentId: order.shiprocketShipmentId,
+            trackingHistory: order.trackingHistory,
         });
-
-    } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message });
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
     }
 };
 
+// ========== MANUAL TRACKING INFO UPDATE (ADMIN UI) ==========
+
 const updateTrackingInfo = async (req, res) => {
     try {
-        const { orderId, awbCode, courierName, trackingUrl, shiprocketOrderId, shiprocketShipmentId } = req.body;
+        const {
+            orderId,
+            awbCode,
+            courierName,
+            trackingUrl,
+            shiprocketOrderId,
+            shiprocketShipmentId,
+        } = req.body;
 
         const updateData = {};
         if (awbCode) updateData.awbCode = awbCode;
@@ -222,23 +347,11 @@ const updateTrackingInfo = async (req, res) => {
         if (shiprocketShipmentId) updateData.shiprocketShipmentId = shiprocketShipmentId;
 
         await orderModel.findByIdAndUpdate(orderId, updateData);
+
         res.json({ success: true, message: 'Tracking info updated successfully' });
-
-    } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message });
-    }
-};
-
-const updatePaymentStatus = async (req, res) => {
-    try {
-        const { orderId, payment } = req.body;
-
-        await orderModel.findByIdAndUpdate(orderId, { payment });
-        res.json({ success: true, message: 'Payment status updated' });
-    } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message });
+    } catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
     }
 };
 
@@ -251,5 +364,5 @@ export {
     updateStatus,
     trackOrder,
     updateTrackingInfo,
-    updatePaymentStatus 
+    updatePaymentStatus,
 };

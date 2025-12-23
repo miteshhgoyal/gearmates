@@ -1,36 +1,31 @@
+// routes/orderRoutes.js (example)
 import express from 'express';
 import {
+    verifyRazorpay,
     placeOrder,
     placeOrderRazorpay,
     allOrders,
     userOrders,
     updateStatus,
-    verifyRazorpay,
     trackOrder,
     updateTrackingInfo,
-    updatePaymentStatus
+    updatePaymentStatus,
 } from '../controllers/orderController.js';
-import adminAuth from '../middleware/adminAuth.js';
-import authUser from '../middleware/auth.js';
+import userAuth from '../middleware/auth.js';
 
-const orderRouter = express.Router();
+const router = express.Router();
 
-// Admin Features
-orderRouter.post('/list', adminAuth, allOrders);
-orderRouter.post('/status', adminAuth, updateStatus);
-orderRouter.post('/update-tracking', adminAuth, updateTrackingInfo);
+// user
+router.post('/place', userAuth, placeOrder);
+router.post('/razorpay', userAuth, placeOrderRazorpay);
+router.post('/verify-razorpay', userAuth, verifyRazorpay);
+router.post('/userorders', userAuth, userOrders);
+router.post('/track', userAuth, trackOrder);
 
-// Payment Features
-orderRouter.post('/place', authUser, placeOrder);
-orderRouter.post('/razorpay', authUser, placeOrderRazorpay);
+// admin
+router.post('/list', userAuth, allOrders);           // you already call api/order/list in admin
+router.post('/status', userAuth, updateStatus);
+router.post('/payment-status', userAuth, updatePaymentStatus);
+router.post('/update-tracking', userAuth, updateTrackingInfo);
 
-// User Feature
-orderRouter.post('/userorders', authUser, userOrders);
-orderRouter.post('/track', authUser, trackOrder);
-
-// verify payment
-orderRouter.post('/verifyRazorpay', authUser, verifyRazorpay);
-
-orderRouter.post('/payment-status', adminAuth, updatePaymentStatus);
-
-export default orderRouter;
+export default router;
