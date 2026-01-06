@@ -6,10 +6,25 @@ import shiprocketService from '../service/shiprocketService.js';
 
 const currency = 'inr';
 
-const razorpayInstance = new razorpay({
-    key_id: process.env.RAZORPAYKEYID,
-    key_secret: process.env.RAZORPAYKEYSECRET,
-});
+// const razorpayInstance = new razorpay({
+//     key_id: process.env.RAZORPAYKEYID,
+//     key_secret: process.env.RAZORPAYKEYSECRET,
+// });
+
+let razorpayInstance = null;
+
+const getRazorpayInstance = () => {
+    if (!razorpayInstance) {
+        if (!process.env.RAZORPAYKEYID || !process.env.RAZORPAYKEYSECRET) {
+            throw new Error('Razorpay credentials not configured');
+        }
+        razorpayInstance = new razorpay({
+            key_id: process.env.RAZORPAYKEYID,
+            key_secret: process.env.RAZORPAYKEYSECRET,
+        });
+    }
+    return razorpayInstance;
+};
 
 // ========== INTERNAL HELPER: FULL SHIPROCKET FLOW ==========
 
@@ -161,6 +176,8 @@ const placeOrder = async (req, res) => {
 
 const placeOrderRazorpay = async (req, res) => {
     try {
+        const instance = getRazorpayInstance();
+
         const { userId, items, amount, address } = req.body;
 
         const totalWeight = items.reduce(
@@ -193,7 +210,7 @@ const placeOrderRazorpay = async (req, res) => {
             receipt: newOrder.id.toString(),
         };
 
-        const order = await razorpayInstance.orders.create(options);
+        const order = await instance.orders.create(options);
 
         res.json({ success: true, order });
     } catch (err) {
